@@ -58,7 +58,7 @@ export class IssuerService {
         // 실제로는 public key 담겨있는 공간이 약간 다른데 대충 일단은 여기 있다고 가정하자
         const publicKey = didDoc.publicKey ?? "mock";
         const originalNonce = career_vc_request_data.orignal_nonce;
-        const encryptedNonce = career_vc_request_data.encypted_nonce;
+        const encryptedNonce = career_vc_request_data.encrypted_nonce;
 
         const verifyResult = this._verifyNonceUsingPublicKey({
             publicKey,
