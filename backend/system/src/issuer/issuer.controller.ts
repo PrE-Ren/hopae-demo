@@ -8,7 +8,7 @@ export class IssuerController {
     @Post()
     async request_vc(@Body() career_vc_request_data: RequestCareerVcDTO): Promise<string>{
         this.issuerService.start()
-        return this.issuerService.request_vc(career_vc_request_data)
+        return await this.issuerService.request_vc(career_vc_request_data)
     }
 
 }
