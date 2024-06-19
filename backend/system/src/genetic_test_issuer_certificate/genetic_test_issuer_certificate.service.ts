@@ -22,14 +22,25 @@ export class GeneticTestIssuerCertificateService {
     return await this.geneticTestIssuerCertificateRepository.save(certificate);
   }
 
-  async findOneByVcDid(vc_did: string): Promise<GeneticTestIssuerCertificate> {
+  async findOneByVcId(
+    vcId: string,
+  ): Promise<GeneticTestIssuerCertificate | null> {
     const entity = await this.geneticTestIssuerCertificateRepository.findOne({
-      where: { vc_did },
+      where: { vc_did: vcId },
       order: { createdAt: 'DESC' }, // 최신순으로 정렬
     });
+
     if (!entity) {
-      throw new Error('Entity not found');
+      return null; // 엔티티가 없으면 null을 반환
     }
+
+    const now = new Date();
+    const vcCreatedAt = entity.createdAt;
+    vcCreatedAt.setMonth(vcCreatedAt.getMonth() + 1);
+    if (now >= vcCreatedAt) {
+      return null;
+    }
+
     return new GeneticTestIssuerCertificate({
       vc_did: entity.vc_did,
       createdAt: entity.createdAt,

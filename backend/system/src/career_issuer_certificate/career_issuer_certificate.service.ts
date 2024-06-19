@@ -21,14 +21,23 @@ export class CareerIssuerCertificateService {
     return await this.careerIssuerCertificateRepository.save(certificate);
   }
 
-  async findOneByVcDid(vc_did: string): Promise<CareerIssuerCertificate> {
+  async findOneByVcId(vc_did: string): Promise<CareerIssuerCertificate | null> {
     const entity = await this.careerIssuerCertificateRepository.findOne({
       where: { vc_did },
       order: { createdAt: 'DESC' }, // 최신순으로 정렬
     });
+
     if (!entity) {
-      throw new Error('Entity not found');
+      return null; // 엔티티가 없으면 null을 반환
     }
+
+    const now = new Date();
+    const vcCreatedAt = entity.createdAt;
+    vcCreatedAt.setMonth(vcCreatedAt.getMonth() + 1);
+    if (now >= vcCreatedAt) {
+      return null;
+    }
+
     return new CareerIssuerCertificate({
       vc_did: entity.vc_did,
       createdAt: entity.createdAt,

@@ -1,5 +1,5 @@
 import { Body, Controller, HttpException, Post } from '@nestjs/common';
-import { VerifyVpDTO } from './dto/verify-career-vp.dto';
+import { VerifyVpDTO } from './dto/verify-vp-dto';
 import { VerifierService } from './verifier.service';
 import { RequestNonceFromVerifierDTO } from './dto/request-nonce-from-verifier';
 
