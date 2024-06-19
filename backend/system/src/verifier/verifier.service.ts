@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { VerifyVpDTO } from './dto/verify-career-vp.dto';
+import { VerifyVpDTO } from './dto/verify-vp-dto';
 import { JwtService } from 'src/jwt/jwt.service';
 import { CareerVerifierApplicantNonceService } from 'src/career_verifier_applicant_nonce/career_verifier_applicant_nonce.service';
 import { GeneticTestVerifierMemberNonceService } from 'src/genetic_test_verifier_member_nonce/genetic_test_verifier_member_nonce.service';
@@ -73,6 +73,7 @@ export class VerifierService {
       verified = await this.jwtService.verifyGeneticTestVpJwt(
         vpVerifyData.holderDid,
         vpVerifyData.vp,
+        vpVerifyData.type,
       );
     } catch (error: any) {
       if (error.response === '2-a' || error.response === '2-c') {

@@ -212,9 +212,8 @@ export class JwtService {
   async verifyCareerVpJwt(holderDid: string, vp: string) {
     console.log('==jwtService: verifyCareerVpJwt==');
     //1. did 리졸버로 holder public key 얻어오기
-    const holderPublicKey = await this.didResolverService.getPublicKeyByDid(
-      holderDid,
-    );
+    const holderPublicKey =
+      await this.didResolverService.getPublicKeyByDid(holderDid);
     console.log(` 1) did 리졸버로 holderPublicKey 얻기 : ${holderPublicKey}`);
 
     //2. decode 해서 payload 에서 필요한 데이터들 얻어오기
@@ -231,9 +230,8 @@ export class JwtService {
     );
 
     //3. did리졸버로 issuer public key 얻어오기
-    const issuerPublicKey = await this.didResolverService.getPublicKeyByDid(
-      issuerDid,
-    );
+    const issuerPublicKey =
+      await this.didResolverService.getPublicKeyByDid(issuerDid);
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
     console.log(`issuerPublicKey: ${issuerPublicKey}`);
@@ -399,12 +397,15 @@ export class JwtService {
     return credential;
   }
 
-  async verifyGeneticTestVpJwt(holderDid: string, vp: string) {
+  async verifyGeneticTestVpJwt(
+    holderDid: string,
+    vp: string,
+    verifier_type: string,
+  ) {
     console.log('==jwtService: verifyGeneticTestVpJwt==');
     //1. did 리졸버로 holder public key 얻어오기
-    const holderPublicKey = await this.didResolverService.getPublicKeyByDid(
-      holderDid,
-    );
+    const holderPublicKey =
+      await this.didResolverService.getPublicKeyByDid(holderDid);
     console.log(` 1) did 리졸버로 holderPublicKey 얻기 : ${holderPublicKey}`);
 
     //2. decode 해서 payload 에서 필요한 데이터들 얻어오기
@@ -421,9 +422,8 @@ export class JwtService {
     );
 
     //3. did리졸버로 issuer public key 얻어오기
-    const issuerPublicKey = await this.didResolverService.getPublicKeyByDid(
-      issuerDid,
-    );
+    const issuerPublicKey =
+      await this.didResolverService.getPublicKeyByDid(issuerDid);
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
     //4. 난수 복호화 테스트
@@ -470,9 +470,13 @@ export class JwtService {
     });
 
     // console.log('\nverify\n');
+    const requiredClaimKeys =
+      verifier_type == '결혼정보회사'
+        ? ['hair_loss_gene_heritability', 'dermatitis_gene_heritability']
+        : ['cancer_risk'];
     const verified = await verifierInstance.verify(
       vp,
-      ['hair_loss_gene_heritability', 'dermatitis_gene_heritability'], // 생명보험사면 cancer_risk 되도록 수정
+      requiredClaimKeys, // 생명보험사면 cancer_risk 되도록 수정
       true,
     );
     console.log(` 5) SDJwtVcInstance.verify()`);
