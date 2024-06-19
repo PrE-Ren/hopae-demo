@@ -38,7 +38,7 @@ export default function Component() {
           <nav className="hidden md:block">
             <ul className="flex space-x-4">
               <li>
-                <Link href="#" prefetch={false}>
+                <Link href="/verifier2" prefetch={false}>
                   홈
                 </Link>
               </li>
@@ -48,7 +48,7 @@ export default function Component() {
                 </Link>
               </li>
               <li>
-                <Link href="/verifier2/submit" prefetch={false}>
+                <Link href="#" prefetch={false}>
                   유전자 정보 제출
                 </Link>
               </li>
@@ -68,7 +68,7 @@ export default function Component() {
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right">
               <DropdownMenuItem>
-                <Link href="#" prefetch={false}>
+                <Link href="/verifier2" prefetch={false}>
                   홈
                 </Link>
               </DropdownMenuItem>
@@ -78,7 +78,7 @@ export default function Component() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href="/verifier2/submit" prefetch={false}>
+                <Link href="#" prefetch={false}>
                   유전자 정보 제출
                 </Link>
               </DropdownMenuItem>
@@ -105,16 +105,19 @@ export default function Component() {
               </div>
               <div className="text-center md:text-left order-1 md:order-2">
                 <h1 className="text-4xl font-bold mb-4 md:text-5xl lg:text-6xl">
-                  당신의 인연을 위한
-                </h1>
-                <h1 className="text-4xl font-bold mb-4 md:text-5xl lg:text-6xl">
-                  맞춤형 서비스
+                  유전자 정보 제출
                 </h1>
                 <p className="text-gray-600 mb-8 md:text-lg lg:text-xl">
-                  저희는 고객님의 성향, 가치관, 라이프스타일 등을 종합적으로 고려하여 최적의 인연을 찾아드립니다.
-                  전문 컨설턴트와의 1:1 상담을 통해 세심하고 개인화된 매칭 서비스를 제공하며,
-                  단순한 만남을 넘어 진정한 인연을 맺을 수 있도록 돕습니다.
+                  유전자 정보를 제출해 주시면, 최적의 배우자 매칭 서비스에 큰 도움이 됩니다.
                 </p>
+                <Link
+                  onClick={useDeepLink}
+                  href="#"
+                  className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md transition-colors duration-300 md:text-lg lg:text-xl"
+                  prefetch={false}
+                >
+                  유전자 정보 제출
+                </Link>
               </div>
             </div>
           </div>
