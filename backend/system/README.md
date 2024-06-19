@@ -33,9 +33,9 @@ $ npm install
   # Database "dev_db" 생성
   CREATE DATABASE dev_db;
   # 유저 생성
-  CREATE 'team_w'@'localhost' identified by 'password_w';
+  CREATE USER 'team_w'@'localhost' identified by 'password_w';
   # 권한 부여
-  GRANT ALL privileges dev_db. to 'team_w'@'localhost';
+  GRANT ALL PRIVILEGES ON dev_db.* TO 'team_w'@'localhost'
   ```
 
 - port 3306에 해당 Database 를 띄운다.
