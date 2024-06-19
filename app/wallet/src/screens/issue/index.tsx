@@ -82,7 +82,6 @@ const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
         encryptedNonce: await encrypt(nonceRes.data.toString()),
       });
       await saveVC(res.data);
-      Alert.alert('인증서 발급 완료', '인증서 발급이 완료되었습니다.');
       navigation.goBack();
     };
     _inner().catch((e) => {

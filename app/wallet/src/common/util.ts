@@ -1,10 +1,33 @@
 import { translationDict } from '@/common/const';
 
-export const translate = (data: string) => {
-  for (const key in translationDict) {
-    data = data.replace(`\"${key}\"`, translationDict[key]);
+export const jsonToEnterSeparatedString = (obj: object) => {
+  const formatValue = (value: any) => {
+    if (typeof value === 'number') {
+      return value + '%';
+    } else if (typeof value === 'object' && value !== null) {
+      return '\n' + jsonToEnterSeparatedString(value);
+    } else {
+      return value;
+    }
+  };
+
+  let result = '';
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      // Translate key if it exists in translation_dict
+      const translatedKey = translationDict[key] || key;
+
+      // Format value (handle nested objects recursively)
+      // @ts-ignore
+      const formattedValue = formatValue(obj[key]);
+
+      // Append to result string
+      result += `${translatedKey}: ${formattedValue}\n`;
+    }
   }
-  return data.replace(/\"/g, '');
+
+  return result.trim(); // Remove trailing newline
 };
 
 export const classifyAxiosError = (error: any) => {
