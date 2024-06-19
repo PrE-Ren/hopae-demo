@@ -37,7 +37,20 @@ $ docker run -p 9944:9944 -p 30333:30333 docknetwork/dock-substrate:testnet --de
 
 ### 4. 서버 실행
 
+별다른 문제가 없다면 8000번 포트 locahost에 띄워집니다.
+
 ```bash
 # 개발모드로 실행해서 콘솔 값을 보자 (데모용)
 $ npm run start:dev
+```
+
+### 5. 주요 행위자 미리 셋업 - init api 사용
+
+post 요청을 통해 init (issuer 2개, holder 1개)
+
+- mysql 서버에 각 행위자의 정보 저장
+- dock chain에 각 행위자의 did doc register
+
+```bash
+curl -X POST localhost:8000/init/all
 ```
