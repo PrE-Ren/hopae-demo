@@ -12,15 +12,33 @@ $ npm install
 
 ### 2. DB 띄우기
 
-mysql database 와 user 를 아래와 같이 생성하고 port 3306에 띄운다.
+- MySQL 설치 후 실행
 
-```
-DB_HOST=localhost
-DB_PORT=3306
-DB_USERNAME=team_w
-DB_PASSWORD=password_w
-DB_NAME=dev_db
-```
+  - windows: https://kimhongsi.tistory.com/entry/MySQL-MYSQL-%EC%84%A4%EC%B9%98-%EA%B3%BC%EC%A0%95-%EC%A0%95%EB%A6%AC-%EB%B0%8F-%EC%8B%A4%ED%96%89-%ED%99%95%EC%9D%B8
+  - mac OS:
+
+    ```bash
+    $ brew install mysql
+    $ mysql.server start
+    $ mysql_secure_installation //비밀번호 설정
+    $ mysql -u root -p //위에서 설정한 비밀번호 입력
+
+    ```
+
+- MySQL 콘솔 접속 후 아래 명령어 실행
+
+  ```bash
+  # 현재 mysql 서버에 존재하는 db 목록 확인
+  SHOW DATABASES;
+  # Database "dev_db" 생성
+  CREATE DATABASE dev_db;
+  # 유저 생성
+  CREATE 'team_w'@'localhost' identified by 'password_w';
+  # 권한 부여
+  GRANT ALL privileges dev_db. to 'team_w'@'localhost';
+  ```
+
+- port 3306에 해당 Database 를 띄운다.
 
 ### 3. Docker로 Dock-Substrate-Blockchain Node 로컬에 띄우기
 
