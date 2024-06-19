@@ -14,7 +14,7 @@ import * as SecureStore from 'expo-secure-store';
 import { CredentialInfo, SavedCredentialInfo } from '@/entities/credentialInfo';
 import { extractData } from '@/utils/jwt';
 import { useIsFocused } from '@react-navigation/native';
-import { frontendHostingUrl } from '@/common/config';
+import { frontendHostingURL } from '@/common/config';
 import { HStack } from 'react-native-flex-layout';
 import { translationDict } from '@/common/const';
 import { translate } from '@/common/util';
@@ -124,7 +124,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
       <HStack>
         <TouchableWithoutFeedback
           onPress={() => {
-            Linking.openURL(frontendHostingUrl + '/issuer1');
+            Linking.openURL(frontendHostingURL + '/issuer1');
           }}>
           <View
             style={{
@@ -143,7 +143,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
           onPress={() => {
-            Linking.openURL(frontendHostingUrl + '/issuer2');
+            Linking.openURL(frontendHostingURL + '/issuer2');
           }}>
           <View
             style={{
@@ -163,7 +163,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
       <HStack>
         <TouchableWithoutFeedback
           onPress={() => {
-            Linking.openURL(frontendHostingUrl + '/verifier1');
+            Linking.openURL(frontendHostingURL + '/verifier1');
           }}>
           <View
             style={{
@@ -182,7 +182,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
           onPress={() => {
-            Linking.openURL(frontendHostingUrl + '/verifier2');
+            Linking.openURL(frontendHostingURL + '/verifier2');
           }}>
           <View
             style={{
@@ -201,7 +201,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
           onPress={() => {
-            Linking.openURL(frontendHostingUrl + '/verifier3');
+            Linking.openURL(frontendHostingURL + '/verifier3');
           }}>
           <View
             style={{
