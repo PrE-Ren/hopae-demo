@@ -101,6 +101,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                         obj[key] = item.values[idx];
                         return obj;
                       }, {}),
+                      0,
                     )}
                   </Text>
                   <Text style={{ fontSize: 20, color: 'black' }}>
@@ -118,103 +119,103 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
           </View>
         )}
       </View>
-      {/*<HStack>*/}
-      {/*  <TouchableWithoutFeedback*/}
-      {/*    onPress={() => {*/}
-      {/*      Linking.openURL(frontendHostingURL + '/issuer1');*/}
-      {/*    }}>*/}
-      {/*    <View*/}
-      {/*      style={{*/}
-      {/*        padding: 16,*/}
-      {/*        marginTop: 16,*/}
-      {/*        borderRadius: 16,*/}
-      {/*        borderWidth: 2,*/}
-      {/*        borderColor: '#d0d0d0',*/}
-      {/*        flex: 1,*/}
-      {/*        marginRight: 16,*/}
-      {/*      }}>*/}
-      {/*      <Text style={{ fontSize: 20, color: 'black' }}>*/}
-      {/*        {'인증서 발급받기(경력)'}*/}
-      {/*      </Text>*/}
-      {/*    </View>*/}
-      {/*  </TouchableWithoutFeedback>*/}
-      {/*  <TouchableWithoutFeedback*/}
-      {/*    onPress={() => {*/}
-      {/*      Linking.openURL(frontendHostingURL + '/issuer2');*/}
-      {/*    }}>*/}
-      {/*    <View*/}
-      {/*      style={{*/}
-      {/*        padding: 16,*/}
-      {/*        marginTop: 16,*/}
-      {/*        borderRadius: 16,*/}
-      {/*        borderWidth: 2,*/}
-      {/*        borderColor: '#d0d0d0',*/}
-      {/*        flex: 1,*/}
-      {/*      }}>*/}
-      {/*      <Text style={{ fontSize: 20, color: 'black' }}>*/}
-      {/*        {'인증서 발급받기(유전자)'}*/}
-      {/*      </Text>*/}
-      {/*    </View>*/}
-      {/*  </TouchableWithoutFeedback>*/}
-      {/*</HStack>*/}
-      {/*<HStack>*/}
-      {/*  <TouchableWithoutFeedback*/}
-      {/*    onPress={() => {*/}
-      {/*      Linking.openURL(frontendHostingURL + '/verifier1');*/}
-      {/*    }}>*/}
-      {/*    <View*/}
-      {/*      style={{*/}
-      {/*        padding: 16,*/}
-      {/*        marginTop: 16,*/}
-      {/*        borderRadius: 16,*/}
-      {/*        borderWidth: 2,*/}
-      {/*        borderColor: '#d0d0d0',*/}
-      {/*        flex: 1,*/}
-      {/*        marginRight: 16,*/}
-      {/*      }}>*/}
-      {/*      <Text style={{ fontSize: 20, color: 'black' }}>*/}
-      {/*        {'인증하기(경력)'}*/}
-      {/*      </Text>*/}
-      {/*    </View>*/}
-      {/*  </TouchableWithoutFeedback>*/}
-      {/*  <TouchableWithoutFeedback*/}
-      {/*    onPress={() => {*/}
-      {/*      Linking.openURL(frontendHostingURL + '/verifier2');*/}
-      {/*    }}>*/}
-      {/*    <View*/}
-      {/*      style={{*/}
-      {/*        padding: 16,*/}
-      {/*        marginTop: 16,*/}
-      {/*        borderRadius: 16,*/}
-      {/*        borderWidth: 2,*/}
-      {/*        borderColor: '#d0d0d0',*/}
-      {/*        flex: 1,*/}
-      {/*        marginRight: 16,*/}
-      {/*      }}>*/}
-      {/*      <Text style={{ fontSize: 20, color: 'black' }}>*/}
-      {/*        {'인증하기 (유전자/결혼정보)'}*/}
-      {/*      </Text>*/}
-      {/*    </View>*/}
-      {/*  </TouchableWithoutFeedback>*/}
-      {/*  <TouchableWithoutFeedback*/}
-      {/*    onPress={() => {*/}
-      {/*      Linking.openURL(frontendHostingURL + '/verifier3');*/}
-      {/*    }}>*/}
-      {/*    <View*/}
-      {/*      style={{*/}
-      {/*        padding: 16,*/}
-      {/*        marginTop: 16,*/}
-      {/*        borderRadius: 16,*/}
-      {/*        borderWidth: 2,*/}
-      {/*        borderColor: '#d0d0d0',*/}
-      {/*        flex: 1,*/}
-      {/*      }}>*/}
-      {/*      <Text style={{ fontSize: 20, color: 'black' }}>*/}
-      {/*        {'인증하기 (유전자/생명보험)'}*/}
-      {/*      </Text>*/}
-      {/*    </View>*/}
-      {/*  </TouchableWithoutFeedback>*/}
-      {/*</HStack>*/}
+      <HStack>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingURL + '/issuer1');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+              marginRight: 16,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증서 발급받기(경력)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingURL + '/issuer2');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증서 발급받기(유전자)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </HStack>
+      <HStack>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingURL + '/verifier1');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+              marginRight: 16,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증하기(경력)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingURL + '/verifier2');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+              marginRight: 16,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증하기 (유전자/결혼정보)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingURL + '/verifier3');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증하기 (유전자/생명보험)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </HStack>
       <TouchableWithoutFeedback
         onPress={() => {
           SecureStore.deleteItemAsync('credentials').then(() => {

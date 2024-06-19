@@ -1,11 +1,11 @@
 import { translationDict } from '@/common/const';
 
-export const jsonToEnterSeparatedString = (obj: object) => {
+export const jsonToEnterSeparatedString = (obj: object, spaces: number) => {
   const formatValue = (value: any) => {
     if (typeof value === 'number') {
       return value + '%';
     } else if (typeof value === 'object' && value !== null) {
-      return '\n' + jsonToEnterSeparatedString(value);
+      return '\n' + jsonToEnterSeparatedString(value, spaces + 2);
     } else {
       return value;
     }
@@ -22,12 +22,14 @@ export const jsonToEnterSeparatedString = (obj: object) => {
       // @ts-ignore
       const formattedValue = formatValue(obj[key]);
 
+      const indentation = ' '.repeat(spaces);
+
       // Append to result string
-      result += `${translatedKey}: ${formattedValue}\n`;
+      result += `${indentation}${translatedKey}: ${formattedValue}\n`;
     }
   }
 
-  return result.trim(); // Remove trailing newline
+  return result.trimEnd(); // Remove trailing newline
 };
 
 export const classifyAxiosError = (error: any) => {
