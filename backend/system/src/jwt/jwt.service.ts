@@ -497,6 +497,6 @@ export class JwtService {
     encryptedNonce: string,
   ): Promise<boolean> {
     const holderVerifier = await this.createVerifier(publicKey);
-    return holderVerifier(originalNonce.toString(), encryptedNonce);
+    return await holderVerifier(originalNonce.toString(), encryptedNonce);
   }
 }
