@@ -5,3 +5,8 @@ export interface CredentialInfo {
   fields: string[];
   rawString: string;
 }
+
+export interface SavedCredentialInfo {
+  issuer: string;
+  vc: string;
+}

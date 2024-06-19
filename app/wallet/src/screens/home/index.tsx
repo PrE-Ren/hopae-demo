@@ -10,11 +10,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CredentialInfo } from '@/entities/credentialInfo';
+import * as SecureStore from 'expo-secure-store';
+import { CredentialInfo, SavedCredentialInfo } from '@/entities/credentialInfo';
 import { extractData } from '@/utils/jwt';
 import { useIsFocused } from '@react-navigation/native';
 import { frontendHostingUrl } from '@/common/config';
+import { HStack } from 'react-native-flex-layout';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -28,11 +29,11 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   useEffect(() => {
     if (!isFocused) return;
     const _getData = async () => {
-      const creds = await AsyncStorage.getItem('credentials');
+      const creds = await SecureStore.getItemAsync('credentials');
       if (creds) {
         const parsedCreds = JSON.parse(creds);
         const extractedCreds = await Promise.all(
-          parsedCreds.map((c: string) => extractData(c)),
+          parsedCreds.map((c: SavedCredentialInfo) => extractData(c.vc)),
         );
         setCredentials(extractedCreds.filter((c) => c !== null));
       } else {
@@ -112,43 +113,87 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
           </View>
         )}
       </View>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Linking.openURL(frontendHostingUrl + '/issuer1');
-        }}>
-        <View
-          style={{
-            padding: 16,
-            marginTop: 16,
-            borderRadius: 16,
-            borderWidth: 2,
-            borderColor: '#d0d0d0',
+      <HStack>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingUrl + '/issuer1');
           }}>
-          <Text style={{ fontSize: 20, color: 'black' }}>
-            {'인증서 발급받기(웹 자동 연결)'}
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Linking.openURL(frontendHostingUrl + '/verifier1');
-        }}>
-        <View
-          style={{
-            padding: 16,
-            marginTop: 16,
-            borderRadius: 16,
-            borderWidth: 2,
-            borderColor: '#d0d0d0',
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+              marginRight: 16,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증서 발급받기(경력)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingUrl + '/issuer2');
           }}>
-          <Text style={{ fontSize: 20, color: 'black' }}>
-            {'인증하기(웹 자동 연결)'}
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증서 발급받기(유전자)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </HStack>
+      <HStack>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingUrl + '/verifier1');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+              marginRight: 16,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증하기(경력)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingUrl + '/verifier2');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증하기(유전자)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </HStack>
       <TouchableWithoutFeedback
         onPress={() => {
-          AsyncStorage.removeItem('credentials').then(() => {
+          SecureStore.deleteItemAsync('credentials').then(() => {
             setFlag((f) => !f);
           });
         }}>

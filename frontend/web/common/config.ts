@@ -1,3 +1,2 @@
 export const backendBaseURL = "http://localhost:8000";
-export const backendHostingURL = "https://e717-121-170-212-116.ngrok-free.app";
-export const issuerDid = "issuer_did_1";
+export const backendHostingURL = "https://76b5-222-112-23-245.ngrok-free.app";

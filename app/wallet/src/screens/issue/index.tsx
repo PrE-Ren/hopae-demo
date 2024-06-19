@@ -2,19 +2,16 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/navigation/types';
 import React, { FC, useEffect } from 'react';
 import { Alert, Dimensions, Text, View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { dummyEncrypt, encrypt, extractData } from '@/utils/jwt';
+import { encrypt, extractData } from '@/utils/jwt';
 import axios from 'axios';
 import { holderDid } from '@/common/const';
-
-const dummyNonce = 'nonce1';
+import * as SecureStore from 'expo-secure-store';
+import { SavedCredentialInfo } from '@/entities/credentialInfo';
 
 type IssueScreenProps = NativeStackScreenProps<RootStackParamList, 'Issue'>;
 const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
   const vw = Dimensions.get('window').width;
   const saveVC = async (vc: string) => {
-    await AsyncStorage.removeItem('credentials');
-    console.log(vc);
     const data = await extractData(vc);
     if (!data) {
       Alert.alert(
@@ -37,11 +34,16 @@ const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
       );
       return;
     }
-    const credentials = await AsyncStorage.getItem('credentials');
-    let credentialsArr = credentials ? JSON.parse(credentials) : [];
-    await AsyncStorage.setItem(
+    const credentials = await SecureStore.getItemAsync('credentials');
+    let credentialsArr: SavedCredentialInfo[] = credentials
+      ? JSON.parse(credentials)
+      : [];
+    if (credentialsArr.find((c) => c.issuer === data.issuer)) {
+      credentialsArr = credentialsArr.filter((c) => c.issuer !== data.issuer);
+    }
+    await SecureStore.setItemAsync(
       'credentials',
-      JSON.stringify([...credentialsArr, vc]),
+      JSON.stringify([{ issuer: data.issuer, vc: vc }, ...credentialsArr]),
     );
     Alert.alert(
       '인증서가 발급되었습니다',
@@ -76,7 +78,7 @@ const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
       });
       const res = await axios.post(route.params.url, {
         holderDid: holderDid,
-        encryptedNonce: dummyEncrypt(nonceRes.data),
+        encryptedNonce: await encrypt(nonceRes.data),
       });
       await saveVC(res.data);
       Alert.alert('인증서 발급 완료', '인증서 발급이 완료되었습니다.');

@@ -153,6 +153,7 @@ export class JwtService {
 
     // 아래는 VP 까지 만드는
 
+    const nonce = ''; // verifier 에게 받은 Nonce 입력
     const holder = await this.getHolderByDid(holderDid);
     const holderSigner = await this.createSigner(holder.privateKey);
 
@@ -168,7 +169,7 @@ export class JwtService {
       //VP 에 추가되는 Payload
       iat: new Date().getTime(), //VP 만든 시각
       aud: 'https://example.com', //이 VP를 받는 사람 식별자라고 함
-      nonce: '1649983664mock', // 암호화한 난수 - /verifier/nonce/career 응답 + Mock
+      nonce: await holderSigner(nonce), // 암호화한 난수
     };
 
     //SDJWTException: Key Binding Signer not found
@@ -211,8 +212,8 @@ export class JwtService {
   async verifyCareerVpJwt(holderDid: string, vp: string) {
     console.log('==jwtService: verifyCareerVpJwt==');
     //1. did 리졸버로 holder public key 얻어오기
-    const holderDidDoc = await this.didResolverService.getDidDoc(holderDid);
-    let holderPublicKey = holderDidDoc.publicKey ?? 'mock';
+    const holderPublicKey =
+      await this.didResolverService.getPublicKeyByDid(holderDid);
     console.log(` 1) did 리졸버로 holderPublicKey 얻기 : ${holderPublicKey}`);
 
     //2. decode 해서 payload 에서 필요한 데이터들 얻어오기
@@ -229,20 +230,19 @@ export class JwtService {
     );
 
     //3. did리졸버로 issuer public key 얻어오기
-    const issuerDidDoc = await this.didResolverService.getDidDoc(issuerDid);
-    let issuerPublicKey = issuerDidDoc.publicKey ?? 'mock';
+    const issuerPublicKey =
+      await this.didResolverService.getPublicKeyByDid(issuerDid);
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
-    //4. 난수 복호화 테스트
-    const didDoc = await this.didResolverService.getDidDoc(holderDid);
-    // 실제로는 public key 담겨있는 공간이 약간 다른데 대충 일단은 여기 있다고 가정하자
+    console.log(`issuerPublicKey: ${issuerPublicKey}`);
+    console.log(`holderPublicKey: ${holderPublicKey}`);
 
-    const publicKey = didDoc.publicKey ?? 'mock';
+    //4. 난수 복호화 테스트
     const applicant_nonce_entity =
       await this.careerVerifierApplicantNonceService.findOneByDid(holderDid);
 
     const verifyResult = this._verifyNonceUsingPublicKey(
-      publicKey,
+      holderPublicKey,
       applicant_nonce_entity.nonce,
       encryptedNonce,
     );
@@ -252,13 +252,14 @@ export class JwtService {
     console.log(
       ` 4) 난수 복호화 테스트 : ${verifyResult} - ${encryptedNonce}, ${applicant_nonce_entity.nonce}`,
     );
+    console.log('왜 프린트');
 
     //5. instance.verify() 하기
     // 테스트용
-    const issuer = await this.getCareerIssuer();
-    const holder = await this.getHolderByDid(holderDid);
-    issuerPublicKey = issuer.publicKey;
-    holderPublicKey = holder.publicKey;
+
+    console.log(
+      ` 5. instance.verify() 시작: issuer ${issuerDid}, holder ${holderDid} 이용`,
+    );
     const issuerVerifier = await this.createVerifier(issuerPublicKey);
     const holderVerifier = await this.createVerifier(holderPublicKey);
 
@@ -274,9 +275,7 @@ export class JwtService {
 
     // console.log('\nverify\n');
     const verified = await verifierInstance.verify(vp, ['department'], true);
-    console.log(
-      ` 5) SDJwtVcInstance.verify() : issuer ${issuer.did}, holder ${holder.did} 이용`,
-    );
+    console.log(` 5) SDJwtVcInstance.verify()`);
     return verified;
   }
 
@@ -322,7 +321,7 @@ export class JwtService {
     );
 
     // 아래는 VP 까지 만드는
-
+    const nonce = ''; // verifier 에게 받은 Nonce 입력
     const holder = await this.getHolderByDid(holderDid);
     const holderSigner = await this.createSigner(holder.privateKey);
 
@@ -338,7 +337,7 @@ export class JwtService {
       //VP 에 추가되는 Payload
       iat: new Date().getTime(), //VP 만든 시각
       aud: 'https://example.com', //이 VP를 받는 사람 식별자라고 함
-      nonce: '1878741778mock', // 암호화한 난수 - /verifier/nonce/genetic-test 응답 + Mock
+      nonce: await holderSigner(nonce), // 암호화한 난수 - /verifier/nonce/genetic-test 응답 + Mock
     };
 
     //SDJWTException: Key Binding Signer not found
@@ -384,8 +383,8 @@ export class JwtService {
   async verifyGeneticTestVpJwt(holderDid: string, vp: string) {
     console.log('==jwtService: verifyGeneticTestVpJwt==');
     //1. did 리졸버로 holder public key 얻어오기
-    const holderDidDoc = await this.didResolverService.getDidDoc(holderDid);
-    let holderPublicKey = holderDidDoc.publicKey ?? 'mock';
+    const holderPublicKey =
+      await this.didResolverService.getPublicKeyByDid(holderDid);
     console.log(` 1) did 리졸버로 holderPublicKey 얻기 : ${holderPublicKey}`);
 
     //2. decode 해서 payload 에서 필요한 데이터들 얻어오기
@@ -402,20 +401,15 @@ export class JwtService {
     );
 
     //3. did리졸버로 issuer public key 얻어오기
-    const issuerDidDoc = await this.didResolverService.getDidDoc(issuerDid);
-    let issuerPublicKey = issuerDidDoc.publicKey ?? 'mock';
+    const issuerPublicKey =
+      await this.didResolverService.getPublicKeyByDid(issuerDid);
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
-    //4. 난수 복호화 테스트
-    const didDoc = await this.didResolverService.getDidDoc(holderDid);
-    // 실제로는 public key 담겨있는 공간이 약간 다른데 대충 일단은 여기 있다고 가정하자
-
-    const publicKey = didDoc.publicKey ?? 'mock';
     const applicant_nonce_entity =
       await this.geneticTestVerifierMemberNonceService.findOneByDid(holderDid);
 
     const verifyResult = this._verifyNonceUsingPublicKey(
-      publicKey,
+      holderPublicKey,
       applicant_nonce_entity.nonce,
       encryptedNonce,
     );
@@ -428,10 +422,9 @@ export class JwtService {
 
     //5. instance.verify() 하기
     // 테스트용
-    const issuer = await this.getGeneticTestIssuer();
-    const holder = await this.getHolderByDid(holderDid);
-    issuerPublicKey = issuer.publicKey;
-    holderPublicKey = holder.publicKey;
+    console.log(
+      ` 5. instance.verify() 시작: issuer ${issuerDid}, holder ${holderDid} 이용`,
+    );
     const issuerVerifier = await this.createVerifier(issuerPublicKey);
     const holderVerifier = await this.createVerifier(holderPublicKey);
 
@@ -451,9 +444,7 @@ export class JwtService {
       ['dermatitis_gene_heritability'],
       true,
     );
-    console.log(
-      ` 5) SDJwtVcInstance.verify() : issuer ${issuer.did}, holder ${holder.did} 이용`,
-    );
+    console.log(` 5) SDJwtVcInstance.verify()`);
     return verified;
   }
 
@@ -472,20 +463,12 @@ export class JwtService {
   // 이거 일단 임시로 추상화한다고 생각하고 이렇게 만들어놓겠음.
   // 임시로 만들어놓은 방식은 아래 참조
   // 바꿔야 함. 암호화와 같은 알고리즘으로 복호화했을 때 같은지 진짜 확인하기. publicKey 타입 바꾸기
-  _verifyNonceUsingPublicKey(
-    publicKey: string,
+  async _verifyNonceUsingPublicKey(
+    publicKey: JsonWebKey,
     originalNonce: number,
     encryptedNonce: string,
-  ): boolean {
-    const originalNonceStr = '' + originalNonce;
-    console.log('==jwtService: _verifyNonceUsingPublicKey==');
-    console.log(originalNonceStr);
-    console.log(encryptedNonce);
-
-    if (originalNonceStr === encryptedNonce) {
-      return false;
-    }
-    const decrypted = encryptedNonce.replace(publicKey, '');
-    return decrypted === originalNonceStr;
+  ): Promise<boolean> {
+    const holderVerifier = await this.createVerifier(publicKey);
+    return holderVerifier(originalNonce.toString(), encryptedNonce);
   }
 }
