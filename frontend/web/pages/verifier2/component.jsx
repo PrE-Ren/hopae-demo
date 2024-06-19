@@ -10,26 +10,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Component() {
-  const useDeepLink = () => {
-    const url = backendHostingURL + "/verifier/vp/genetic-test"; // verifier 2 backend
-    const nonceUrl = backendHostingURL + "/verifier/nonce/genetic-test"; // 대신 서버에서 가져와야함
-    const fields = ["hair_loss_gene_heritability", "dermatitis_gene_heritability"];
-    window.open(
-      "wwwallet://verify?url=" +
-        url +
-        "&nonceUrl=" +
-        nonceUrl +
-        "&fields=" +
-        fields.join(",")
-    );
-  };
-
-  useEffect(() => {
-    setInterval(() => {
-      // check if the user is verified (polling)
-    }, 1000);
-  }, []);
-
   return (
     <div>
       <header className="bg-gray-900 text-white py-4 px-4 md:py-6 md:px-8">
@@ -111,9 +91,10 @@ export default function Component() {
                   맞춤형 서비스
                 </h1>
                 <p className="text-gray-600 mb-8 md:text-lg lg:text-xl">
-                  저희는 고객님의 성향, 가치관, 라이프스타일 등을 종합적으로 고려하여 최적의 인연을 찾아드립니다.
-                  전문 컨설턴트와의 1:1 상담을 통해 세심하고 개인화된 매칭 서비스를 제공하며,
-                  단순한 만남을 넘어 진정한 인연을 맺을 수 있도록 돕습니다.
+                  저희는 고객님의 성향, 가치관, 라이프스타일 등을 종합적으로
+                  고려하여 최적의 인연을 찾아드립니다. 전문 컨설턴트와의 1:1
+                  상담을 통해 세심하고 개인화된 매칭 서비스를 제공하며, 단순한
+                  만남을 넘어 진정한 인연을 맺을 수 있도록 돕습니다.
                 </p>
               </div>
             </div>

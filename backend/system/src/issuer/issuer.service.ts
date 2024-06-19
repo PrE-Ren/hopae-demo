@@ -124,7 +124,7 @@ export class IssuerService {
       );
     const encryptedNonce = careerVcRequestData.encryptedNonce;
 
-    const verifyResult = this.jwtService._verifyNonceUsingPublicKey(
+    const verifyResult = await this.jwtService._verifyNonceUsingPublicKey(
       publicKey,
       employee_nonce_entity.nonce,
       encryptedNonce,
@@ -181,7 +181,7 @@ export class IssuerService {
       );
     const encryptedNonce = vcRequestData.encryptedNonce;
 
-    const verifyResult = this.jwtService._verifyNonceUsingPublicKey(
+    const verifyResult = await this.jwtService._verifyNonceUsingPublicKey(
       publicKey,
       tester_nonce_entity.nonce,
       encryptedNonce,

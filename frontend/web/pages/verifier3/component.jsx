@@ -16,13 +16,16 @@ export default function Component() {
     const url = backendHostingURL + "/verifier/vp/genetic-test"; // verifier 2 backend
     const nonceUrl = backendHostingURL + "/verifier/nonce/genetic-test"; // 대신 서버에서 가져와야함
     const fields = ["cancer_risk"];
+    const target = "생명보험사";
     window.open(
       "wwwallet://verify?url=" +
         url +
         "&nonceUrl=" +
         nonceUrl +
         "&fields=" +
-        fields.join(",")
+        fields.join(",") +
+        "&target=" +
+        target
     );
   };
 
@@ -146,9 +149,7 @@ export default function Component() {
       </div>
       <div className="bg-[#f0f8ff] py-8 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">
-            유전 정보를 제출하세요
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">유전 정보를 제출하세요</h2>
           <p className="mb-4">
             개인 맞춤형 생명 보험 견적을 받으시려면 유전자 정보를 제출해 주세요.
             이를 통해 가장 정확한 보장 옵션을 제공해 드릴 수 있습니다.

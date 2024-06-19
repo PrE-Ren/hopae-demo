@@ -79,7 +79,7 @@ const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
       });
       const res = await axios.post(route.params.url, {
         holderDid: holderDid,
-        encryptedNonce: await encrypt(nonceRes.data),
+        encryptedNonce: await encrypt(nonceRes.data.toString()),
       });
       await saveVC(res.data);
       Alert.alert('인증서 발급 완료', '인증서 발급이 완료되었습니다.');

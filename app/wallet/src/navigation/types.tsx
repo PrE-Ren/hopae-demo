@@ -7,6 +7,7 @@ export type VerifyParams = {
   nonceUrl: string;
   url: string;
   fields: string;
+  target: string | undefined;
 };
 
 export type RootStackParamList = {

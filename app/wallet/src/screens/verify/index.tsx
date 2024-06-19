@@ -22,6 +22,7 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
   const [url, setUrl] = useState<string>('');
   const [nonceUrl, setNonceUrl] = useState<string>('');
   const [fields, setFields] = useState<string[]>([]);
+  const [target, setTarget] = useState<string | undefined>(undefined);
   const [flag, setFlag] = useState<boolean | null>(null);
   const vw = Dimensions.get('window').width;
 
@@ -34,6 +35,7 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
     setUrl(route.params.url);
     setNonceUrl(route.params.nonceUrl);
     setFields(route.params.fields.split(','));
+    setTarget(route.params.target);
     setOpen(true);
   }, [route.params]);
 
@@ -107,6 +109,7 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
       await axios.post(url, {
         vp: vp,
         holderDid: holderDid,
+        type: target,
       });
       Alert.alert(
         '인증이 완료되었습니다',

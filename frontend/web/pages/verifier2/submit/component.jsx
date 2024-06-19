@@ -13,14 +13,20 @@ export default function Component() {
   const useDeepLink = () => {
     const url = backendHostingURL + "/verifier/vp/genetic-test"; // verifier 2 backend
     const nonceUrl = backendHostingURL + "/verifier/nonce/genetic-test"; // 대신 서버에서 가져와야함
-    const fields = ["hair_loss_gene_heritability", "dermatitis_gene_heritability"];
+    const fields = [
+      "hair_loss_gene_heritability",
+      "dermatitis_gene_heritability",
+    ];
+    const target = "결혼정보회사";
     window.open(
       "wwwallet://verify?url=" +
         url +
         "&nonceUrl=" +
         nonceUrl +
         "&fields=" +
-        fields.join(",")
+        fields.join(",") +
+        "&target=" +
+        target
     );
   };
 
@@ -108,7 +114,8 @@ export default function Component() {
                   유전자 정보 제출
                 </h1>
                 <p className="text-gray-600 mb-8 md:text-lg lg:text-xl">
-                  유전자 정보를 제출해 주시면, 최적의 배우자 매칭 서비스에 큰 도움이 됩니다.
+                  유전자 정보를 제출해 주시면, 최적의 배우자 매칭 서비스에 큰
+                  도움이 됩니다.
                 </p>
                 <Link
                   onClick={useDeepLink}

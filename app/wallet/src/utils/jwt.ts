@@ -2,8 +2,6 @@ import { CredentialInfo } from '@/entities/credentialInfo';
 import { SDJwtInstance } from '@sd-jwt/core';
 import { decodeSdJwt, getClaims } from '@sd-jwt/decode';
 import { digest, generateSalt, getSigner } from '@/utils/crypto';
-import { HMAC } from 'react-native-simple-crypto';
-import { Buffer } from 'buffer';
 
 export const holderPrivateKey = {
   key_ops: ['sign'],
