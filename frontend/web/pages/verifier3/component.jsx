@@ -29,7 +29,7 @@ export default function Component() {
   return (
     <div className="flex flex-col h-screen">
       <header className="bg-primary text-primary-foreground py-4 px-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Life Insurance</h1>
+        <h1 className="text-2xl font-bold">XX생명보험</h1>
         <Button size="lg" className="lg:hidden">
           <MenuIcon className="w-6 h-6" />
           <span className="sr-only">Toggle menu</span>
@@ -54,26 +54,26 @@ export default function Component() {
                   className="block text-lg font-medium"
                   prefetch={false}
                 >
-                  Term Life
+                  정기 생명 보험
                 </Link>
                 <Link
                   href="#"
                   className="block text-lg font-medium"
                   prefetch={false}
                 >
-                  Whole Life
+                  종신 생명 보험
                 </Link>
                 <Link
                   href="#"
                   className="block text-lg font-medium"
                   prefetch={false}
                 >
-                  Universal Life
+                  유니버셜 생명 보험
                 </Link>
               </nav>
               <div className="space-y-2">
-                <Button>Get a Quote</Button>
-                <Button variant="outline">Contact Us</Button>
+                <Button>견적 확인</Button>
+                <Button variant="outline">상담 신청</Button>
               </div>
             </div>
           </SheetContent>
@@ -87,16 +87,16 @@ export default function Component() {
                 <Card className="h-full">
                   <CardContent className="p-6 space-y-4">
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-bold">Term Life</h3>
+                      <h3 className="text-2xl font-bold">정기 생명 보험</h3>
                       <p className="text-muted-foreground">
-                        Affordable coverage for a specific period of time.
+                        합리적인 보험료로 특정 기간동안 보장
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-4xl font-bold">$25</p>
-                      <p className="text-muted-foreground">per month</p>
+                      <p className="text-4xl font-bold">25,000원</p>
+                      <p className="text-muted-foreground">한 달</p>
                     </div>
-                    <Button>Get a Quote</Button>
+                    <Button>견적 확인</Button>
                   </CardContent>
                 </Card>
               </CarouselItem>
@@ -104,16 +104,16 @@ export default function Component() {
                 <Card className="h-full">
                   <CardContent className="p-6 space-y-4">
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-bold">Whole Life</h3>
+                      <h3 className="text-2xl font-bold">종신 생명 보험</h3>
                       <p className="text-muted-foreground">
-                        Lifelong coverage with cash value build-up.
+                        현금 가치가 누적되는 평생 보장
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-4xl font-bold">$50</p>
-                      <p className="text-muted-foreground">per month</p>
+                      <p className="text-4xl font-bold">50,000원</p>
+                      <p className="text-muted-foreground">한 달</p>
                     </div>
-                    <Button>Get a Quote</Button>
+                    <Button>견적 확인</Button>
                   </CardContent>
                 </Card>
               </CarouselItem>
@@ -121,16 +121,16 @@ export default function Component() {
                 <Card className="h-full">
                   <CardContent className="p-6 space-y-4">
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-bold">Universal Life</h3>
+                      <h3 className="text-2xl font-bold">유니버셜 생명 보험</h3>
                       <p className="text-muted-foreground">
-                        Flexible coverage with investment opportunities.
+                        투자 기회가 있는 유연한 보장
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-4xl font-bold">$75</p>
-                      <p className="text-muted-foreground">per month</p>
+                      <p className="text-4xl font-bold">75,000원</p>
+                      <p className="text-muted-foreground">한 달</p>
                     </div>
-                    <Button>Get a Quote</Button>
+                    <Button>견적 확인</Button>
                   </CardContent>
                 </Card>
               </CarouselItem>
@@ -147,14 +147,13 @@ export default function Component() {
       <div className="bg-[#f0f8ff] py-8 px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold mb-4">
-            Submit Genetic Information
+            유전 정보를 제출하세요
           </h2>
           <p className="mb-4">
-            To get a personalized life insurance quote, please submit your
-            genetic information. This will help us provide you with the most
-            accurate coverage options.
+            개인 맞춤형 생명 보험 견적을 받으시려면 유전자 정보를 제출해 주세요.
+            이를 통해 가장 정확한 보장 옵션을 제공해 드릴 수 있습니다.
           </p>
-          <Button onClick={useDeepLink}>Submit Genetic Information</Button>
+          <Button onClick={useDeepLink}>유전 정보 제출하기</Button>
         </div>
       </div>
       <footer className="bg-muted text-muted-foreground py-4 px-6 text-sm">
