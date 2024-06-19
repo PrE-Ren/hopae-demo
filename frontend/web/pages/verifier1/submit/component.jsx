@@ -8,7 +8,7 @@ export default function Component() {
   const useDeepLink = () => {
     const url = backendHostingURL + "/verifier/vp/career"; // verifier 1 backend
     const nonceUrl = backendHostingURL + "/verifier/nonce/career"; // 대신 서버에서 가져와야함
-    const fields = ["department", "position", "join", "leave"];
+    const fields = ["department", "join", "leave"];
     window.open(
       "wwwallet://verify?url=" +
         url +
