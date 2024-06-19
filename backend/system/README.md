@@ -12,7 +12,7 @@ $ npm install
 
 ### 2. DB 띄우기
 
-다음 스펙을 만족하는 DB가 있는 mysql 서버를 port 3306에 로컬호스트로 띄워주세요.
+mysql database 와 user 를 아래와 같이 생성하고 port 3306에 띄운다.
 
 ```
 DB_HOST=localhost
@@ -24,32 +24,26 @@ DB_NAME=dev_db
 
 ### 3. Docker로 Dock-Substrate-Blockchain Node 로컬에 띄우기
 
-\*dock network : Did SSI 시스템을 다루기 위해 만들어진 블록체인 네트워크
-docker를 통해, docknetwork의 testnet을 dev모드로 실행해야 한다.
-
-- dev모드로 해야 transaction fee 없이 할 수 있음.
+\*dock network : did SSI 시스템을 다루기 위해 만들어진 블록체인 네트워크
+docker를 통해, docknetwork의 testnet을 실행해야 한다.
 
 ```bash
 $ docker run -p 9944:9944 -p 30333:30333 docknetwork/dock-substrate:testnet --dev --ws-external --enable-offchain-indexing=true
 ```
 
-- 여기까지 왔으면 dock node에 9944번 포트를 통해 접속이 가능한 것임.
+- 이제 dock node에 9944번 포트를 통해 접속이 가능하다.
 
-### 4. 서버 실행
-
-별다른 문제가 없다면 8000번 포트 locahost에 띄워집니다.
+### 4. 서버 실행 (port: 8000)
 
 ```bash
-# 개발모드로 실행해서 콘솔 값을 보자 (데모용)
+$ cd /backend/system
 $ npm run start:dev
 ```
 
-### 5. 주요 행위자 미리 셋업 - init api 사용
+### 5. POST /init/all : 월렛 앱 holder, 증명서 issuer 행위자 생성
 
-post 요청을 통해 init (issuer 2개, holder 1개)
-
-- mysql 서버에 각 행위자의 정보 저장
-- dock chain에 각 행위자의 did doc register
+- mysql DB에 각 행위자의 정보가 저장된다.
+- dock chain에 각 행위자의 did doc 등록된다.
 
 ```bash
 curl -X POST localhost:8000/init/all
