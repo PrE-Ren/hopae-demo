@@ -16,63 +16,77 @@ export default function Component() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <header className="px-4 lg:px-6 h-14 flex items-center">
-        {/* <Link href="#" className="flex items-center justify-center" prefetch={false}>
-          <MountainIcon className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
-        </Link> */}
-        <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="lg:hidden">
-            <MenuIcon className="h-6 w-6" />
-            <span className="sr-only">Toggle navigation menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <Link href="#" prefetch={false}>
-            <MountainIcon className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
-          </Link>
-          <div className="grid gap-2 py-6">
-            <Collapsible className="grid gap-4">
-              <CollapsibleTrigger className="flex w-full items-center text-lg font-semibold [&[data-state=open]>svg]:rotate-90">
-                Company
-                <ChevronRightIcon className="ml-auto h-5 w-5 transition-all" />
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <div className="-mx-6 grid gap-6 bg-gray-100 p-6 dark:bg-gray-800">
-                  <Link href="#" className="group grid h-auto w-full justify-start gap-1" prefetch={false}>
-                    <div className="text-sm font-medium leading-none group-hover:underline">About Us</div>
-                    <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Learn more about our company.
-                    </div>
-                  </Link>
-                  <Link href="#" className="group grid h-auto w-full justify-start gap-1" prefetch={false}>
-                    <div className="text-sm font-medium leading-none group-hover:underline">Our Team</div>
-                    <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Meet the people behind the company.
-                    </div>
-                  </Link>
-                  <Link href="#" className="group grid h-auto w-full justify-start gap-1" prefetch={false}>
-                    <div className="text-sm font-medium leading-none group-hover:underline">Certificates</div>
-                    <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                      Request certificates from the company.
-                    </div>
-                  </Link>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-            <Link href="#" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Products
+      <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="lg:hidden">
+              <MenuIcon className="h-6 w-6" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <Link href="#" prefetch={false}>
+              <MountainIcon className="h-6 w-6" />
+              <span className="sr-only">Acme Inc</span>
             </Link>
-            <Link href="#" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Pricing
-            </Link>
-            <Link href="#" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Contact
-            </Link>
-          </div>
-        </SheetContent>
-      </Sheet>
+            <div className="grid gap-2 py-6">
+              <Collapsible className="grid gap-4">
+                <CollapsibleTrigger className="flex w-full items-center text-lg font-semibold [&[data-state=open]>svg]:rotate-90">
+                  회사 B
+                  <ChevronRightIcon className="ml-auto h-5 w-5 transition-all" />
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="-mx-6 grid gap-6 bg-gray-100 p-6 dark:bg-gray-800">
+                    <Link
+                      href="#"
+                      className="group grid h-auto w-full justify-start gap-1"
+                      prefetch={false}
+                    >
+                      <div className="text-sm font-medium leading-none group-hover:underline">
+                        회사 소개
+                      </div>
+                      <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
+                        우리 회사에 대해 더 알아보세요.
+                      </div>
+                    </Link>
+                    <Link
+                      href="/issuer1/issuance"
+                      className="group grid h-auto w-full justify-start gap-1"
+                      prefetch={false}
+                    >
+                      <div className="text-sm font-medium leading-none group-hover:underline">
+                        발급
+                      </div>
+                      <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
+                        월렛 앱으로 관련 증명서를 발급받을 수 있습니다.
+                      </div>
+                    </Link>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+              <Link
+                href="#"
+                className="flex w-full items-center py-2 text-lg font-semibold"
+                prefetch={false}
+              >
+                제품
+              </Link>
+              <Link
+                href="#"
+                className="flex w-full items-center py-2 text-lg font-semibold"
+                prefetch={false}
+              >
+                가격 책정
+              </Link>
+              <Link
+                href="#"
+                className="flex w-full items-center py-2 text-lg font-semibold"
+                prefetch={false}
+              >
+                연락처
+              </Link>
+            </div>
+          </SheetContent>
+        </Sheet>
       <div className="w-[150px]">
         <Link href="#" className="mr-6 hidden lg:flex" prefetch={false}>
           <MountainIcon className="h-6 w-6" />

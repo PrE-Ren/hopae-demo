@@ -42,7 +42,7 @@ export default function Component() {
             <div className="grid gap-2 py-6">
               <Collapsible className="grid gap-4">
                 <CollapsibleTrigger className="flex w-full items-center text-lg font-semibold [&[data-state=open]>svg]:rotate-90">
-                  Company
+                  회사 B
                   <ChevronRightIcon className="ml-auto h-5 w-5 transition-all" />
                 </CollapsibleTrigger>
                 <CollapsibleContent>
@@ -53,22 +53,10 @@ export default function Component() {
                       prefetch={false}
                     >
                       <div className="text-sm font-medium leading-none group-hover:underline">
-                        About Us
+                        회사 소개
                       </div>
                       <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                        Learn more about our company.
-                      </div>
-                    </Link>
-                    <Link
-                      href="#"
-                      className="group grid h-auto w-full justify-start gap-1"
-                      prefetch={false}
-                    >
-                      <div className="text-sm font-medium leading-none group-hover:underline">
-                        Our Team
-                      </div>
-                      <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                        Meet the people behind the company.
+                        우리 회사에 대해 더 알아보세요.
                       </div>
                     </Link>
                     <Link
@@ -80,7 +68,7 @@ export default function Component() {
                         발급
                       </div>
                       <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                        월렛 앱으로 증명서를 발급받을 수 있습니다.
+                        월렛 앱으로 관련 증명서를 발급받을 수 있습니다.
                       </div>
                     </Link>
                   </div>
@@ -91,21 +79,21 @@ export default function Component() {
                 className="flex w-full items-center py-2 text-lg font-semibold"
                 prefetch={false}
               >
-                Products
+                제품
               </Link>
               <Link
                 href="#"
                 className="flex w-full items-center py-2 text-lg font-semibold"
                 prefetch={false}
               >
-                Pricing
+                가격 책정
               </Link>
               <Link
                 href="#"
                 className="flex w-full items-center py-2 text-lg font-semibold"
                 prefetch={false}
               >
-                Contact
+                연락처
               </Link>
             </div>
           </SheetContent>
@@ -203,12 +191,10 @@ export default function Component() {
         <section className="bg-gradient-to-r from-[#6366F1] to-[#9333EA] py-12 px-4 flex flex-col items-center justify-center text-center text-white">
           <div className="max-w-3xl">
             <MountainIcon className="mx-auto h-10 w-10 mb-4" />
-            <h1 className="text-3xl font-bold mb-4">Acme Inc.</h1>
+            <h1 className="text-5xl font-bold mb-4">회사 B</h1>
             <p className="text-base">
-              Acme Inc. is a leading provider of innovative solutions that
-              empower businesses to thrive in the digital age. With a focus on
-              cutting-edge technology and exceptional customer service, we are
-              dedicated to helping our clients achieve their goals.
+              회사 B는 기업들이 디지털 시대에서 번창할 수 있도록 돕는 혁신적인 솔루션의 선도적인 제공업체입니다.
+              첨단 기술과 탁월한 고객 서비스를 중점으로 하여, 고객들이 목표를 달성할 수 있도록 헌신하고 있습니다.
             </p>
           </div>
         </section>
@@ -218,9 +204,8 @@ export default function Component() {
               <RocketIcon className="h-10 w-10 mb-4 text-[#6366F1]" />
               <h2 className="text-xl font-bold mb-2">Innovation</h2>
               <p className="text-muted-foreground text-sm">
-                We are committed to pushing the boundaries of what's possible,
-                constantly exploring new technologies and ideas to deliver
-                cutting-edge solutions.
+                우리는 가능한 것의 한계를 넘어서는 데 전념하고 있으며,
+                최첨단 솔루션을 제공하기 위해 끊임없이 새로운 기술과 아이디어를 탐구합니다.
               </p>
             </div>
             <div className="flex flex-col items-center">
