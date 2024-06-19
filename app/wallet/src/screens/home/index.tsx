@@ -10,8 +10,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CredentialInfo } from '@/entities/credentialInfo';
+import * as SecureStore from 'expo-secure-store';
+import { CredentialInfo, SavedCredentialInfo } from '@/entities/credentialInfo';
 import { extractData } from '@/utils/jwt';
 import { useIsFocused } from '@react-navigation/native';
 import { frontendHostingUrl } from '@/common/config';
@@ -29,11 +29,11 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   useEffect(() => {
     if (!isFocused) return;
     const _getData = async () => {
-      const creds = await AsyncStorage.getItem('credentials');
+      const creds = await SecureStore.getItemAsync('credentials');
       if (creds) {
         const parsedCreds = JSON.parse(creds);
         const extractedCreds = await Promise.all(
-          parsedCreds.map((c: string) => extractData(c)),
+          parsedCreds.map((c: SavedCredentialInfo) => extractData(c.vc)),
         );
         setCredentials(extractedCreds.filter((c) => c !== null));
       } else {
@@ -193,7 +193,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
       </HStack>
       <TouchableWithoutFeedback
         onPress={() => {
-          AsyncStorage.removeItem('credentials').then(() => {
+          SecureStore.deleteItemAsync('credentials').then(() => {
             setFlag((f) => !f);
           });
         }}>

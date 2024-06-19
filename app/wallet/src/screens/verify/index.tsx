@@ -9,10 +9,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { extractData, makeVP } from '@/utils/jwt';
 import axios from 'axios';
 import { holderDid } from '@/common/const';
+import { CredentialInfo, SavedCredentialInfo } from '@/entities/credentialInfo';
 
 type VerifyScreenProps = NativeStackScreenProps<RootStackParamList, 'Verify'>;
 const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
@@ -38,7 +39,7 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
   useEffect(() => {
     if (!flag) return;
     const _inner = async () => {
-      const creds = await AsyncStorage.getItem('credentials');
+      const creds = await SecureStore.getItemAsync('credentials');
       if (!creds) {
         Alert.alert(
           '인증서가 없습니다',
@@ -60,9 +61,9 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
         );
         return;
       }
-      const credentials: string[] = JSON.parse(creds);
+      const credentials: SavedCredentialInfo[] = JSON.parse(creds);
       const promises = credentials.map(async (a) => {
-        return await extractData(a);
+        return await extractData(a.vc);
       });
 
       const results = await Promise.all(promises);
