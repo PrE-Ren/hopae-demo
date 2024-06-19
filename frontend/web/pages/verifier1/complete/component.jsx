@@ -16,7 +16,7 @@ export default function Component() {
       <header className="bg-gray-900 text-white py-4 px-6 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="#" className="text-xl font-bold" prefetch={false}>
-            Acme Corp
+            회사 A
           </Link>
         </div>
         <DropdownMenu>
@@ -37,7 +37,7 @@ export default function Component() {
                 prefetch={false}
               >
                 <BadgeIcon className="h-5 w-5" />
-                Submit Certificate
+                증명서 제출
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

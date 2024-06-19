@@ -30,7 +30,7 @@ export default function Component() {
       <header className="bg-gray-900 text-white py-4 px-6 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="#" className="text-xl font-bold" prefetch={false}>
-            Acme Corp
+            회사 A
           </Link>
         </div>
         <DropdownMenu>
@@ -51,7 +51,7 @@ export default function Component() {
                 prefetch={false}
               >
                 <BadgeIcon className="h-5 w-5" />
-                Submit Certificate
+                증명서 제출
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -60,15 +60,15 @@ export default function Component() {
       <div>
         <section className="flex-1 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
           <div className="max-w-3xl px-6 py-12 text-center">
-            <h1 className="text-4xl font-bold mb-4">Submit Your Certificate</h1>
-            <p className="text-gray-500 dark:text-gray-400 mb-8">Upload your certificate to get verified.</p>
+            <h1 className="text-4xl font-bold mb-4">증명서를 제출하세요</h1>
+            <p className="text-gray-500 dark:text-gray-400 mb-8">월렛 앱에 있는 증명서를 제출할 수 있습니다.</p>
             <Button
               onClick={useDeepLink}
               href="#"
               className="inline-flex h-12 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
               prefetch={false}
             >
-              Submit Certificate
+              증명서 제출
             </Button>
           </div>
         </section>
