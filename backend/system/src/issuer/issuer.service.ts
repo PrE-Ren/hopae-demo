@@ -67,10 +67,10 @@ export class IssuerService {
     );
   }
 
-  async findCareerVc(vcDid: string): Promise<boolean> {
-    console.log(`==issuerService: findCareerVc ${vcDid} ==`);
+  async findCareerVc(vcId: string): Promise<boolean> {
+    console.log(`==issuerService: findCareerVc ${vcId} ==`);
     const certificate =
-      await this.careerIssuerCertificateService.findOneByVcDid(vcDid);
+      await this.careerIssuerCertificateService.findOneByVcId(vcId);
 
     if (!certificate) {
       return false;
@@ -79,10 +79,10 @@ export class IssuerService {
     }
   }
 
-  async findGeneticTestVc(vcDid: string): Promise<boolean> {
-    console.log(`==issuerService: findCareerVc ${vcDid} ==`);
+  async findGeneticTestVc(vcId: string): Promise<boolean> {
+    console.log(`==issuerService: findGeneticTestVc ${vcId} ==`);
     const certificate =
-      await this.geneticTestIssuerCertificateService.findOneByVcDid(vcDid);
+      await this.geneticTestIssuerCertificateService.findOneByVcId(vcId);
 
     if (!certificate) {
       return false;
