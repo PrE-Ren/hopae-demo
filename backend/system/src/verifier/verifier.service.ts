@@ -40,7 +40,10 @@ export class VerifierService {
         vpVerifyData.holderDid,
         vpVerifyData.vp,
       );
-    } catch (SDJWTException) {
+    } catch (error: any) {
+      if (error.response === '2-a' || error.response === '2-c') {
+        throw error;
+      }
       throw new HttpException('2-b', 400);
     }
     console.log('!! 1번 검증 완료 (시그니처, 난수 검증)');
@@ -71,7 +74,10 @@ export class VerifierService {
         vpVerifyData.holderDid,
         vpVerifyData.vp,
       );
-    } catch (SDJWTException) {
+    } catch (error: any) {
+      if (error.response === '2-a' || error.response === '2-c') {
+        throw error;
+      }
       throw new HttpException('2-b', 400);
     }
     console.log('!! 1번 검증 완료 (시그니처, 난수 검증)');

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { holderDid } from '@/common/const';
 import * as SecureStore from 'expo-secure-store';
 import { SavedCredentialInfo } from '@/entities/credentialInfo';
+import { classifyAxiosError } from '@/common/util';
 
 type IssueScreenProps = NativeStackScreenProps<RootStackParamList, 'Issue'>;
 const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
@@ -88,7 +89,7 @@ const IssueScreen: FC<IssueScreenProps> = ({ navigation, route }) => {
       console.error(e);
       Alert.alert(
         '인증서 발급에 실패했습니다',
-        '',
+        classifyAxiosError(e),
         [
           {
             text: '확인',

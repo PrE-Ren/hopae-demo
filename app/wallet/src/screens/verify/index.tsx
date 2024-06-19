@@ -12,8 +12,9 @@ import {
 import * as SecureStore from 'expo-secure-store';
 import { extractData, makeVP } from '@/utils/jwt';
 import axios from 'axios';
-import { holderDid } from '@/common/const';
+import { holderDid, translationDict } from '@/common/const';
 import { CredentialInfo, SavedCredentialInfo } from '@/entities/credentialInfo';
+import { classifyAxiosError } from '@/common/util';
 
 type VerifyScreenProps = NativeStackScreenProps<RootStackParamList, 'Verify'>;
 const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
@@ -37,7 +38,9 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
   }, [route.params]);
 
   useEffect(() => {
-    if (!flag) return;
+    if (!flag) {
+      return;
+    }
     const _inner = async () => {
       const creds = await SecureStore.getItemAsync('credentials');
       if (!creds) {
@@ -98,7 +101,7 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
       const vp = await makeVP(
         filteredResults[0]!.rawString,
         fields,
-        nonceRes.data,
+        nonceRes.data.toString(),
       );
       console.log('vp created: ', vp);
       await axios.post(url, {
@@ -125,10 +128,9 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
       );
     };
     _inner().catch((e) => {
-      console.error(e);
       Alert.alert(
         '인증에 실패했습니다',
-        '',
+        classifyAxiosError(e),
         [
           {
             text: '확인',
@@ -181,7 +183,11 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
           </View>
           <View style={{ padding: 8, paddingBottom: 32 }}>
             {fields.map((f) => {
-              return <Text style={{ fontSize: 18, color: 'black' }}>{f}</Text>;
+              return (
+                <Text style={{ fontSize: 18, color: 'black' }}>
+                  {translationDict[f]}
+                </Text>
+              );
             })}
           </View>
           <TouchableWithoutFeedback
