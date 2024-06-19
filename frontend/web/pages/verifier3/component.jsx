@@ -1,8 +1,14 @@
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent } from "@/components/ui/sheet"
-import Link from "next/link"
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import Link from "next/link";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
 import { backendHostingURL } from "@/common/config";
 
 export default function Component() {
@@ -29,20 +35,39 @@ export default function Component() {
           <span className="sr-only">Toggle menu</span>
         </Button>
         <Sheet>
-          <SheetContent side="left" className="bg-primary text-primary-foreground p-6 w-[300px] max-w-[90vw]">
+          <SheetContent
+            side="left"
+            className="bg-primary text-primary-foreground p-6 w-[300px] max-w-[90vw]"
+          >
             <div className="space-y-4">
-              <Link href="#" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
+              <Link
+                href="#"
+                className="flex items-center gap-2 text-lg font-semibold"
+                prefetch={false}
+              >
                 <MountainIcon className="w-6 h-6" />
                 <span>Acme Life</span>
               </Link>
               <nav className="space-y-2">
-                <Link href="#" className="block text-lg font-medium" prefetch={false}>
+                <Link
+                  href="#"
+                  className="block text-lg font-medium"
+                  prefetch={false}
+                >
                   Term Life
                 </Link>
-                <Link href="#" className="block text-lg font-medium" prefetch={false}>
+                <Link
+                  href="#"
+                  className="block text-lg font-medium"
+                  prefetch={false}
+                >
                   Whole Life
                 </Link>
-                <Link href="#" className="block text-lg font-medium" prefetch={false}>
+                <Link
+                  href="#"
+                  className="block text-lg font-medium"
+                  prefetch={false}
+                >
                   Universal Life
                 </Link>
               </nav>
@@ -63,7 +88,9 @@ export default function Component() {
                   <CardContent className="p-6 space-y-4">
                     <div className="space-y-2">
                       <h3 className="text-2xl font-bold">Term Life</h3>
-                      <p className="text-muted-foreground">Affordable coverage for a specific period of time.</p>
+                      <p className="text-muted-foreground">
+                        Affordable coverage for a specific period of time.
+                      </p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-4xl font-bold">$25</p>
@@ -78,7 +105,9 @@ export default function Component() {
                   <CardContent className="p-6 space-y-4">
                     <div className="space-y-2">
                       <h3 className="text-2xl font-bold">Whole Life</h3>
-                      <p className="text-muted-foreground">Lifelong coverage with cash value build-up.</p>
+                      <p className="text-muted-foreground">
+                        Lifelong coverage with cash value build-up.
+                      </p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-4xl font-bold">$50</p>
@@ -93,7 +122,9 @@ export default function Component() {
                   <CardContent className="p-6 space-y-4">
                     <div className="space-y-2">
                       <h3 className="text-2xl font-bold">Universal Life</h3>
-                      <p className="text-muted-foreground">Flexible coverage with investment opportunities.</p>
+                      <p className="text-muted-foreground">
+                        Flexible coverage with investment opportunities.
+                      </p>
                     </div>
                     <div className="space-y-1">
                       <p className="text-4xl font-bold">$75</p>
@@ -115,10 +146,13 @@ export default function Component() {
       </div>
       <div className="bg-[#f0f8ff] py-8 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">Submit Genetic Information</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Submit Genetic Information
+          </h2>
           <p className="mb-4">
-            To get a personalized life insurance quote, please submit your genetic information. This will help us
-            provide you with the most accurate coverage options.
+            To get a personalized life insurance quote, please submit your
+            genetic information. This will help us provide you with the most
+            accurate coverage options.
           </p>
           <Button onClick={useDeepLink}>Submit Genetic Information</Button>
         </div>
@@ -127,7 +161,7 @@ export default function Component() {
         <p>&copy; 2024 Acme Life Insurance. All rights reserved.</p>
       </footer>
     </div>
-  )
+  );
 }
 
 function ChevronLeftIcon(props) {
@@ -146,9 +180,8 @@ function ChevronLeftIcon(props) {
     >
       <path d="m15 18-6-6 6-6" />
     </svg>
-  )
+  );
 }
-
 
 function ChevronRightIcon(props) {
   return (
@@ -166,9 +199,8 @@ function ChevronRightIcon(props) {
     >
       <path d="m9 18 6-6-6-6" />
     </svg>
-  )
+  );
 }
-
 
 function MenuIcon(props) {
   return (
@@ -188,9 +220,8 @@ function MenuIcon(props) {
       <line x1="4" x2="20" y1="6" y2="6" />
       <line x1="4" x2="20" y1="18" y2="18" />
     </svg>
-  )
+  );
 }
-
 
 function MountainIcon(props) {
   return (
@@ -208,5 +239,5 @@ function MountainIcon(props) {
     >
       <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
     </svg>
-  )
+  );
 }

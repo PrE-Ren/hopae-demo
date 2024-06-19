@@ -65,10 +65,10 @@ const VerifyScreen: FC<VerifyScreenProps> = ({ navigation, route }) => {
       const promises = credentials.map(async (a) => {
         return await extractData(a.vc);
       });
-
       const results = await Promise.all(promises);
+      console.log(results);
       const filteredResults = results.filter((data) => {
-        return data?.fields.every((val) => fields.includes(val));
+        return data && fields.every((val) => data.fields.includes(val));
       });
       if (filteredResults.length === 0) {
         Alert.alert(

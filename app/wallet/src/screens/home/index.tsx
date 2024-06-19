@@ -16,8 +16,16 @@ import { extractData } from '@/utils/jwt';
 import { useIsFocused } from '@react-navigation/native';
 import { frontendHostingUrl } from '@/common/config';
 import { HStack } from 'react-native-flex-layout';
+import { translationDict } from '@/common/const';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const translate = (data: string) => {
+  for (const key in translationDict) {
+    data = data.replace(`\"${key}\"`, translationDict[key]);
+  }
+  return data.replace(/\"/g, '');
+};
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const vw = Dimensions.get('window').width;
@@ -93,13 +101,19 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text style={{ fontSize: 20, color: 'black' }}>
                     {item.issuer}
                   </Text>
-                  {item.fields.map((f) => {
+                  {item.fields.map((f, i) => {
                     return (
-                      <Text style={{ fontSize: 18, color: 'black' }}>{f}</Text>
+                      <Text style={{ fontSize: 18, color: 'black' }}>
+                        {translationDict[f] +
+                          ' : ' +
+                          (item.values[i]
+                            ? translate(JSON.stringify(item.values[i]))
+                            : '없음')}
+                      </Text>
                     );
                   })}
                   <Text style={{ fontSize: 20, color: 'black' }}>
-                    {'유효기간 - ' + item.issueDate.toLocaleDateString('ko-KR')}
+                    {'발급일 - ' + item.issueDate.toLocaleDateString('ko-KR')}
                   </Text>
                 </View>
               );
@@ -184,9 +198,28 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
               borderWidth: 2,
               borderColor: '#d0d0d0',
               flex: 1,
+              marginRight: 16,
             }}>
             <Text style={{ fontSize: 20, color: 'black' }}>
-              {'인증하기(유전자)'}
+              {'인증하기 (유전자/결혼정보)'}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Linking.openURL(frontendHostingUrl + '/verifier3');
+          }}>
+          <View
+            style={{
+              padding: 16,
+              marginTop: 16,
+              borderRadius: 16,
+              borderWidth: 2,
+              borderColor: '#d0d0d0',
+              flex: 1,
+            }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>
+              {'인증하기 (유전자/생명보험)'}
             </Text>
           </View>
         </TouchableWithoutFeedback>

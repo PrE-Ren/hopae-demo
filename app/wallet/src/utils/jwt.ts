@@ -5,17 +5,14 @@ import { digest, generateSalt, getSigner } from '@/utils/crypto';
 import { HMAC } from 'react-native-simple-crypto';
 import { Buffer } from 'buffer';
 
-// Your secret key (private key for HS256)
-const secretKey = 'your-very-secure-private-key';
-
 export const holderPrivateKey = {
   key_ops: ['sign'],
   ext: true,
   kty: 'EC',
-  x: 'SKe8y2LIr5ig9YMF1kV08wOvCUKGndAp_77AargmDTA',
-  y: '3cC13BAJCLIFUQqImQXRndHL4vwvO-h0OdPSHah_qCQ',
+  x: 'UnjoAVHwrQctpLfwxodbv84tCqGFytR-3ftvMFue8UU',
+  y: 'O3ZiOJgGicy6CHBfQQ2P5G79O72YkZ065KztH6lUEO0',
   crv: 'P-256',
-  d: '0z6YrIvfSiThDDSoxwA81csdxuU5DRFVZSYXE9X-A4w',
+  d: 'NaRtJp5hu2T2K30xIEd2SY3CkGSAoIqDF8NP0syIOvM',
 };
 
 export const dummyEncrypt = (data: string) => {
@@ -46,11 +43,28 @@ export const extractData = async (
       kbSigner: undefined,
       kbSignAlg: 'ES256',
     });
+    const allKeys = await vpInstance.keys(vc);
+    const filteredKeys = allKeys.filter(
+      (key) =>
+        !key.includes('.') &&
+        key !== 'vct' &&
+        key !== 'iss' &&
+        key !== 'iat' &&
+        key !== 'exp' &&
+        key !== 'nbf' &&
+        key !== 'jti' &&
+        key !== 'sub' &&
+        key !== 'aud' &&
+        key !== 'subject' &&
+        key !== 'issuer' &&
+        key !== 'id',
+    );
     return {
       name: claims.vct,
       issuer: claims.iss,
       issueDate: new Date(claims.iat),
-      fields: await vpInstance.presentableKeys(vc),
+      fields: filteredKeys,
+      values: filteredKeys.map((key) => claims[key]),
       rawString: vc,
     };
   } catch (e) {

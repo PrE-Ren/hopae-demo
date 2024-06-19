@@ -3,6 +3,7 @@ export interface CredentialInfo {
   issuer: string;
   issueDate: Date;
   fields: string[];
+  values: (string | undefined)[];
   rawString: string;
 }
 
