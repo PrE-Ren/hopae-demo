@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ES256, digest, generateSalt } from '@sd-jwt/crypto-nodejs';
 import { CareerVcClaims, GeneticTestVcClaims } from 'src/issuer/dto/claims.dto';
 import { SDJwtVcInstance } from '@sd-jwt/sd-jwt-vc';
@@ -212,8 +212,9 @@ export class JwtService {
   async verifyCareerVpJwt(holderDid: string, vp: string) {
     console.log('==jwtService: verifyCareerVpJwt==');
     //1. did 리졸버로 holder public key 얻어오기
-    const holderPublicKey =
-      await this.didResolverService.getPublicKeyByDid(holderDid);
+    const holderPublicKey = await this.didResolverService.getPublicKeyByDid(
+      holderDid,
+    );
     console.log(` 1) did 리졸버로 holderPublicKey 얻기 : ${holderPublicKey}`);
 
     //2. decode 해서 payload 에서 필요한 데이터들 얻어오기
@@ -230,8 +231,9 @@ export class JwtService {
     );
 
     //3. did리졸버로 issuer public key 얻어오기
-    const issuerPublicKey =
-      await this.didResolverService.getPublicKeyByDid(issuerDid);
+    const issuerPublicKey = await this.didResolverService.getPublicKeyByDid(
+      issuerDid,
+    );
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
     console.log(`issuerPublicKey: ${issuerPublicKey}`);
@@ -250,7 +252,7 @@ export class JwtService {
       throw new HttpException('2-a', 400);
     }
 
-    const verifyResult = this._verifyNonceUsingPublicKey(
+    const verifyResult = await this._verifyNonceUsingPublicKey(
       holderPublicKey,
       applicant_nonce_entity.nonce,
       encryptedNonce,
@@ -400,8 +402,9 @@ export class JwtService {
   async verifyGeneticTestVpJwt(holderDid: string, vp: string) {
     console.log('==jwtService: verifyGeneticTestVpJwt==');
     //1. did 리졸버로 holder public key 얻어오기
-    const holderPublicKey =
-      await this.didResolverService.getPublicKeyByDid(holderDid);
+    const holderPublicKey = await this.didResolverService.getPublicKeyByDid(
+      holderDid,
+    );
     console.log(` 1) did 리졸버로 holderPublicKey 얻기 : ${holderPublicKey}`);
 
     //2. decode 해서 payload 에서 필요한 데이터들 얻어오기
@@ -418,8 +421,9 @@ export class JwtService {
     );
 
     //3. did리졸버로 issuer public key 얻어오기
-    const issuerPublicKey =
-      await this.didResolverService.getPublicKeyByDid(issuerDid);
+    const issuerPublicKey = await this.didResolverService.getPublicKeyByDid(
+      issuerDid,
+    );
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
     //4. 난수 복호화 테스트
@@ -435,7 +439,7 @@ export class JwtService {
       throw new HttpException('2-a', 400);
     }
 
-    const verifyResult = this._verifyNonceUsingPublicKey(
+    const verifyResult = await this._verifyNonceUsingPublicKey(
       holderPublicKey,
       member_nonce_entity.nonce,
       encryptedNonce,

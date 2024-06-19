@@ -17,15 +17,9 @@ import { useIsFocused } from '@react-navigation/native';
 import { frontendHostingUrl } from '@/common/config';
 import { HStack } from 'react-native-flex-layout';
 import { translationDict } from '@/common/const';
+import { translate } from '@/common/util';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
-const translate = (data: string) => {
-  for (const key in translationDict) {
-    data = data.replace(`\"${key}\"`, translationDict[key]);
-  }
-  return data.replace(/\"/g, '');
-};
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const vw = Dimensions.get('window').width;

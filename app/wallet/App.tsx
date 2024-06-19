@@ -16,6 +16,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import HomeScreen from '@/screens/home';
 import VerifyScreen from '@/screens/verify';
 import IssueScreen from '@/screens/issue';
+import { LogBox } from 'react-native';
 
 const config = {
   screens: {
@@ -34,6 +35,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+
+  LogBox.ignoreAllLogs();
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
