@@ -19,34 +19,34 @@ export default function Component() {
               className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               prefetch={false}
             >
-              About
+              소개
             </Link>
             <Link
               href="#"
               className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               prefetch={false}
             >
-              Services
+              제공하는 서비스
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
-                Genetic Test Results
+                검사 결과 확인
                 <ChevronDownIcon className="ml-1 h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
                 <DropdownMenuItem>
                   <Link href="/issuer2/issuance" prefetch={false}>
-                    Issuance of Genetic Test Results
+                    유전자 검사 결과 발급
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Understand Test Results
+                    검사 결과 해석
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Genetic Counseling
+                    유전 정보 상담
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -56,7 +56,7 @@ export default function Component() {
               className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               prefetch={false}
             >
-              Contact
+              연락처
             </Link>
           </nav>
           <div className="md:hidden">
@@ -69,32 +69,32 @@ export default function Component() {
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    About
+                    소개
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Services
+                    제공하는 서비스
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/issuer2/issuance" prefetch={false}>
-                    Issuance of Genetic Test Results
+                    유전자 검사 결과 발급
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Understand Test Results
+                    검사 결과 해석
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Genetic Counseling
+                    유전 정보 상담
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Contact
+                    연락처
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -108,11 +108,10 @@ export default function Component() {
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
               <div className="space-y-4">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                  Unlock the Power of Your Genetic Data
+                  당신의 유전 정보를 알려드립니다
                 </h1>
                 <p className="text-gray-500 dark:text-gray-400 md:text-xl">
-                  Genoma Insights provides comprehensive genetic testing and analysis to help you understand your health
-                  and wellness on a deeper level.
+                  Genoma Insights는 체계적인 유전자 검사와 분석을 제공하여 여러분의 건강을 깊이 이해하도록 돕습니다.
                 </p>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link
@@ -120,14 +119,14 @@ export default function Component() {
                     className="inline-flex h-10 items-center justify-center rounded-md bg-indigo-500 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-indigo-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-600 disabled:pointer-events-none disabled:opacity-50 dark:bg-indigo-400 dark:text-gray-900 dark:hover:bg-indigo-300"
                     prefetch={false}
                   >
-                    Get Started
+                    검사 신청
                   </Link>
                   <Link
                     href="#"
                     className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-8 text-sm font-medium text-gray-600 shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-600 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-50"
                     prefetch={false}
                   >
-                    Learn More
+                    더 알아보기
                   </Link>
                 </div>
               </div>

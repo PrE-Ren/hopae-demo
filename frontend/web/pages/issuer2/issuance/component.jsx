@@ -35,22 +35,22 @@ export default function Component() {
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    About
+                    소개
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Services
+                    제공하는 서비스
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Issuance of Genetic Test Results
+                    유전자 검사 결과 발급
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="#" prefetch={false}>
-                    Contact
+                    연락처
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -63,10 +63,10 @@ export default function Component() {
           <div className="container mx-auto px-4 md:px-6 text-center">
             <div className="space-y-4">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Issuance of your genetic results
+                유전자 검사 결과지 발급
               </h1>
               <p className="text-gray-500 dark:text-gray-400 md:text-xl">
-                Access your comprehensive genetic insights with ease.
+                유전자 검사 결과를 전자 지갑 안에 손쉽게 보관할 수 있습니다.
               </p>
               <Link
                 onClick={useDeepLink}
@@ -74,7 +74,7 @@ export default function Component() {
                 className="inline-flex h-12 items-center justify-center rounded-md bg-indigo-500 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-indigo-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-indigo-500 dark:text-white dark:hover:bg-indigo-600 dark:focus-visible:ring-indigo-300"
                 prefetch={false}
               >
-                Issuance of my genetic results
+                검사 결과 발급
               </Link>
             </div>
           </div>
