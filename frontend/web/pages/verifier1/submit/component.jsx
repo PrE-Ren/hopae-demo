@@ -30,7 +30,7 @@ export default function Component() {
       <header className="bg-gray-900 text-white py-4 px-6 flex justify-between items-center">
         <div className="flex items-center">
           <Link href="#" className="text-xl font-bold" prefetch={false}>
-            회사 A
+            회사 B
           </Link>
         </div>
         <DropdownMenu>

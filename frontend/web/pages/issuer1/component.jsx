@@ -42,7 +42,7 @@ export default function Component() {
             <div className="grid gap-2 py-6">
               <Collapsible className="grid gap-4">
                 <CollapsibleTrigger className="flex w-full items-center text-lg font-semibold [&[data-state=open]>svg]:rotate-90">
-                  회사 B
+                  회사 A 
                   <ChevronRightIcon className="ml-auto h-5 w-5 transition-all" />
                 </CollapsibleTrigger>
                 <CollapsibleContent>
@@ -65,7 +65,7 @@ export default function Component() {
                       prefetch={false}
                     >
                       <div className="text-sm font-medium leading-none group-hover:underline">
-                        발급
+                        증명서
                       </div>
                       <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
                         월렛 앱으로 관련 증명서를 발급받을 수 있습니다.
@@ -108,7 +108,7 @@ export default function Component() {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Company</NavigationMenuTrigger>
+                <NavigationMenuTrigger>회사 A</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <div className="grid w-[400px] p-2">
                     <NavigationMenuLink asChild>
@@ -118,38 +118,24 @@ export default function Component() {
                         prefetch={false}
                       >
                         <div className="text-sm font-medium leading-none group-hover:underline">
-                          About Us
+                          회사 소개
                         </div>
                         <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                          Learn more about our company.
+                          우리 회사에 대해서 더 알아보세요.
                         </div>
                       </Link>
                     </NavigationMenuLink>
                     <NavigationMenuLink asChild>
                       <Link
-                        href="#"
+                        href="/issuer1/issuance"
                         className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                         prefetch={false}
                       >
                         <div className="text-sm font-medium leading-none group-hover:underline">
-                          Our Team
+                          증명서
                         </div>
                         <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                          Meet the people behind the company.
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link
-                        href="#"
-                        className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-white p-4 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-                        prefetch={false}
-                      >
-                        <div className="text-sm font-medium leading-none group-hover:underline">
-                          Certificates
-                        </div>
-                        <div className="line-clamp-2 text-sm leading-snug text-gray-500 dark:text-gray-400">
-                          Request certificates from the company.
+                          월렛 앱으로 관련 증명서를 발급받을 수 있습니다.
                         </div>
                       </Link>
                     </NavigationMenuLink>
@@ -162,7 +148,7 @@ export default function Component() {
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
-                  Products
+                  제품
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
@@ -171,7 +157,7 @@ export default function Component() {
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
-                  Pricing
+                  가격 책정
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
@@ -180,7 +166,7 @@ export default function Component() {
                   className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
                   prefetch={false}
                 >
-                  Contact
+                  연락처
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuList>
@@ -191,9 +177,9 @@ export default function Component() {
         <section className="bg-gradient-to-r from-[#6366F1] to-[#9333EA] py-12 px-4 flex flex-col items-center justify-center text-center text-white">
           <div className="max-w-3xl">
             <MountainIcon className="mx-auto h-10 w-10 mb-4" />
-            <h1 className="text-5xl font-bold mb-4">회사 B</h1>
+            <h1 className="text-5xl font-bold mb-4">회사 A</h1>
             <p className="text-base">
-              회사 B는 기업들이 디지털 시대에서 번창할 수 있도록 돕는 혁신적인 솔루션의 선도적인 제공업체입니다.
+              회사 A는 기업들이 디지털 시대에서 번창할 수 있도록 돕는 혁신적인 솔루션의 선도적인 제공업체입니다.
               첨단 기술과 탁월한 고객 서비스를 중점으로 하여, 고객들이 목표를 달성할 수 있도록 헌신하고 있습니다.
             </p>
           </div>
@@ -212,18 +198,16 @@ export default function Component() {
               <UsersIcon className="h-10 w-10 mb-4 text-[#9333EA]" />
               <h2 className="text-xl font-bold mb-2">Collaboration</h2>
               <p className="text-muted-foreground text-sm">
-                We believe in the power of teamwork, fostering a culture of open
-                communication and mutual respect to deliver the best results for
-                our clients.
+                우리는 팀워크의 힘을 믿으며, 고객들에게 최상의 결과를 제공하기 위해
+                개방적인 커뮤니케이션과 상호 존중의 문화를 육성합니다.
               </p>
             </div>
             <div className="flex flex-col items-center">
               <BoltIcon className="h-10 w-10 mb-4 text-[#10B981]" />
               <h2 className="text-xl font-bold mb-2">Agility</h2>
               <p className="text-muted-foreground text-sm">
-                We are nimble and responsive, adapting quickly to changing
-                market conditions and client needs to ensure we deliver
-                exceptional value.
+                우리는 민첩하고 반응성이 뛰어나며,
+                변화하는 시장 상황과 고객의 요구에 신속히 대응하여 우수한 가치를 제공합니다.
               </p>
             </div>
           </div>
@@ -231,55 +215,9 @@ export default function Component() {
         <section className="bg-white py-12 px-4">
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <h2 className="text-2xl font-bold mb-4">Our Products</h2>
-              <p className="text-muted-foreground mb-6 text-sm">
-                Acme Inc. offers a wide range of innovative products to help
-                businesses thrive in the digital age.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-[#F3F4F6] rounded-lg p-4">
-                  <LaptopIcon className="h-7 w-7 mb-4 text-[#6366F1]" />
-                  <h3 className="text-lg font-bold mb-2">Web Development</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Our cutting-edge web development solutions help businesses
-                    create stunning, responsive websites that engage customers
-                    and drive results.
-                  </p>
-                </div>
-                <div className="bg-[#F3F4F6] rounded-lg p-4">
-                  <DatabaseIcon className="h-7 w-7 mb-4 text-[#9333EA]" />
-                  <h3 className="text-lg font-bold mb-2">Data Analytics</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Our advanced data analytics tools provide businesses with
-                    valuable insights to make informed decisions and optimize
-                    their operations.
-                  </p>
-                </div>
-                <div className="bg-[#F3F4F6] rounded-lg p-4">
-                  <CloudIcon className="h-7 w-7 mb-4 text-[#10B981]" />
-                  <h3 className="text-lg font-bold mb-2">Cloud Solutions</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Our cloud-based solutions offer businesses scalable, secure,
-                    and cost-effective infrastructure to power their digital
-                    transformation.
-                  </p>
-                </div>
-                <div className="bg-[#F3F4F6] rounded-lg p-4">
-                  <SmartphoneIcon className="h-7 w-7 mb-4 text-[#6366F1]" />
-                  <h3 className="text-lg font-bold mb-2">Mobile Development</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Our mobile development expertise helps businesses create
-                    engaging, user-friendly apps that deliver exceptional
-                    experiences to their customers.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
               <h2 className="text-2xl font-bold mb-4">Meet Our Team</h2>
               <p className="text-muted-foreground mb-6 text-sm">
-                Our talented team of experts is dedicated to delivering
-                exceptional results for our clients.
+                저희 탁월한 전문가들은 고객에게 뛰어난 결과물을 제공하기 위해 헌신하고 있습니다.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-[#F3F4F6] rounded-lg p-4 flex flex-col items-center">
