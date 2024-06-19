@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CareerIssuerMeService } from 'src/career_issuer_me/career_issuer_me.service';
 import { DockService } from 'src/dock/dock.service';
 import { DockDidUtilService } from 'src/dock/util_service/util.service';
@@ -13,17 +13,19 @@ export class InitController {
   // 원래 인자 받아서 할까 했는데, 이게 고정이라니깐 이렇게 하자.
   async initAll() {
     const issuer1Did = await this.initService.initIssuer({
-      issuerName: 'issuer1',
+      issuerName: 'issuer1-career',
+      type: 'career',
     });
     const issuer2Did = await this.initService.initIssuer({
-      issuerName: 'issuer2',
+      issuerName: 'issuer2-genetic',
+      type: 'genetic-test',
     });
     const holderDid = await this.initService.initHolder();
     return {
-      issuer1: {
+      issuer1_career: {
         did: issuer1Did,
       },
-      issuer2: {
+      issuer2_genetic: {
         did: issuer2Did,
       },
       holder: {

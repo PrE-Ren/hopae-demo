@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CareerIssuerMeService } from 'src/career_issuer_me/career_issuer_me.service';
 import { DockService } from 'src/dock/dock.service';
 import { DockDidUtilService } from 'src/dock/util_service/util.service';
+import { GeneticTestIssuerMeService } from 'src/genetic_test_issuer_me/genetic_test_issuer_me.service';
 import { JwtService } from 'src/jwt/jwt.service';
 import { TestHolderService } from 'src/test_holder/test_holder.service';
 
@@ -9,14 +10,23 @@ import { TestHolderService } from 'src/test_holder/test_holder.service';
 export class InitService {
   constructor(
     private readonly careerIssuerMeService: CareerIssuerMeService,
+    private readonly geneticTestIssuerMeService: GeneticTestIssuerMeService,
     private readonly testHolderService: TestHolderService,
     private readonly dockService: DockService,
     private readonly dockDidUtilService: DockDidUtilService,
     private readonly jwtService: JwtService,
   ) {}
 
-  async initIssuer({ issuerName }: { issuerName: string }) {
-    console.log(`-----------------initIssuer (${issuerName})-----------------`);
+  async initIssuer({
+    issuerName,
+    type,
+  }: {
+    issuerName: string;
+    type: 'career' | 'genetic-test';
+  }) {
+    console.log(
+      `-----------------initIssuer (${issuerName} , ${type})-----------------`,
+    );
     // 이미 localhost 에 websocket - dock substrate node 가 떠있어야 한다.
     await this.dockService.connectToNode();
     /// issuer1 : 경력 증명서 떼주는 issuer --------------------------------------------
@@ -31,13 +41,23 @@ export class InitService {
     console.log('publicKey', publicKey);
     await this.dockService.disconnectNode();
 
-    console.log('엔티티 및 key pair 디비에 저장 시작 --------->');
-    await this.careerIssuerMeService.create(
-      did,
-      JSON.stringify(publicKey),
-      JSON.stringify(privateKey),
-      issuerName,
-    );
+    console.log(`엔티티 및 key pair 디비에 저장 시작 타입: ${type} --------->`);
+    if (type === 'career') {
+      await this.careerIssuerMeService.create(
+        did,
+        JSON.stringify(publicKey),
+        JSON.stringify(privateKey),
+        issuerName,
+      );
+    } else {
+      await this.geneticTestIssuerMeService.create(
+        did,
+        JSON.stringify(publicKey),
+        JSON.stringify(privateKey),
+        issuerName,
+      );
+    }
+
     console.log('엔티티 및 key pair 디비에 저장 완료 --------->');
     console.log('issuer1Did', did);
     console.log('publicKey', publicKey);

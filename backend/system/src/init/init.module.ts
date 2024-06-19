@@ -10,9 +10,16 @@ import { CareerIssuerMeModule } from 'src/career_issuer_me/career_issuer_me.modu
 import { DockModule } from 'src/dock/dock.module';
 import { TestHolderModule } from 'src/test_holder/test_holder.module';
 import { JwtModule } from 'src/jwt/jwt.module';
+import { GeneticTestIssuerMeModule } from 'src/genetic_test_issuer_me/genetic_test_issuer_me.module';
 
 @Module({
-  imports: [CareerIssuerMeModule, DockModule, TestHolderModule, JwtModule],
+  imports: [
+    CareerIssuerMeModule,
+    DockModule,
+    TestHolderModule,
+    JwtModule,
+    GeneticTestIssuerMeModule,
+  ],
   controllers: [InitController],
   providers: [InitService],
 })
