@@ -1,6 +1,16 @@
 export const holderDid =
   'did:dock:5C9s68UmGTLXE6WwKZGRcZhSUX72G51WJ8wTw9fbCXC3CbKw';
 
+export const holderPrivateKey = {
+  key_ops: ['sign'],
+  ext: true,
+  kty: 'EC',
+  x: 'UnjoAVHwrQctpLfwxodbv84tCqGFytR-3ftvMFue8UU',
+  y: 'O3ZiOJgGicy6CHBfQQ2P5G79O72YkZ065KztH6lUEO0',
+  crv: 'P-256',
+  d: 'NaRtJp5hu2T2K30xIEd2SY3CkGSAoIqDF8NP0syIOvM',
+};
+
 export const translationDict: { [key: string]: string } = {
   department: '부서 이름',
   position: '직위',
