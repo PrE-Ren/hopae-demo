@@ -41,7 +41,7 @@ export class VerifierService {
         vpVerifyData.vp,
       );
     } catch (SDJWTException) {
-      throw new HttpException('sd-jwt verify 실패', 400);
+      throw new HttpException('2-b', 400);
     }
     console.log('!! 1번 검증 완료 (시그니처, 난수 검증)');
 
@@ -54,7 +54,7 @@ export class VerifierService {
     });
     const find = await res.json();
     if (!find) {
-      throw new HttpException('VC 가 issuer 의 DB 에서 조회되지 않음', 400);
+      throw new HttpException('2-d', 400);
     }
     console.log(`!! 2번 검증 완료 (issuer 디비에서 vcId 찾기 : ${vcId})`);
 
@@ -72,7 +72,7 @@ export class VerifierService {
         vpVerifyData.vp,
       );
     } catch (SDJWTException) {
-      throw new HttpException('sd-jwt verify 실패', 400);
+      throw new HttpException('2-b', 400);
     }
     console.log('!! 1번 검증 완료 (시그니처, 난수 검증)');
 
@@ -88,7 +88,7 @@ export class VerifierService {
     );
     const find = await res.json();
     if (!find) {
-      throw new HttpException('VC 가 issuer 의 DB 에서 조회되지 않음', 400);
+      throw new HttpException('2-d', 400);
     }
     console.log(`!! 2번 검증 완료 (issuer 디비에서 vcId 찾기 : ${vcId})`);
 
