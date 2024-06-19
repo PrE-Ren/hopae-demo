@@ -130,7 +130,7 @@ export class IssuerService {
       encryptedNonce,
     );
     if (!verifyResult) {
-      throw new HttpException('pulic key를 통한 난수 verify에 실패함', 400);
+      throw new HttpException('1-b', 403);
     }
 
     // issuer DB 에서 career 가져오기
@@ -138,9 +138,7 @@ export class IssuerService {
       careerVcRequestData.holderDid,
     );
     if (!employee) {
-      throw new NotFoundException(
-        '해당하는 holder의 커리어 정보를 찾을 수 없습니다.',
-      ); //안에 message 가능
+      throw new HttpException('1-a', 404);
     }
 
     // 2. VC 생성
@@ -189,7 +187,7 @@ export class IssuerService {
       encryptedNonce,
     );
     if (!verifyResult) {
-      throw new HttpException('pulic key를 통한 난수 verify에 실패함', 400);
+      throw new HttpException('1-b', 403);
     }
 
     // issuer DB 에서 genetic_test 가져오기
@@ -198,9 +196,7 @@ export class IssuerService {
         vcRequestData.holderDid,
       );
     if (!genetic_test_result) {
-      throw new NotFoundException(
-        '해당하는 holder의 유전자 검사 결과 정보를 찾을 수 없습니다.',
-      );
+      throw new HttpException('1-a', 404);
     }
 
     // 2. VC 생성

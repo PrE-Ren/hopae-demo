@@ -12,10 +12,12 @@ export class GeneticTestVerifierMemberNonce {
     if (data) {
       this.did = data.did;
       this.nonce = data.nonce;
+      this.createdAt = data.createdAt;
     }
   }
   did: string;
   nonce: number;
+  createdAt: Date;
 }
 
 @Entity({ name: 'geneticTestVerifierMemberNonce' })

@@ -38,6 +38,7 @@ export class CareerVerifierApplicantNonceService {
     return new CareerVerifierApplicantNonce({
       did: entity.did,
       nonce: entity.nonce,
+      createdAt: entity.createdAt,
     });
   }
 }

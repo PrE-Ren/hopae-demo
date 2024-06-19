@@ -151,60 +151,60 @@ export class JwtService {
       disclosureFrame,
     );
 
-    // 아래는 VP 까지 만드는
+    // // 아래는 VP 까지 만드는
 
-    const nonce = ''; // verifier 에게 받은 Nonce 입력
-    const holder = await this.getHolderByDid(holderDid);
-    const holderSigner = await this.createSigner(holder.privateKey);
+    // const nonce = ''; // verifier 에게 받은 Nonce 입력
+    // const holder = await this.getHolderByDid(holderDid);
+    // const holderSigner = await this.createSigner(holder.privateKey);
 
-    const presenterInstance = new SDJwtVcInstance({
-      kbSigner: holderSigner,
-      kbSignAlg: 'EdDSA',
-      hasher: digest,
-      hashAlg: 'SHA-256',
-      saltGenerator: generateSalt,
-    });
-    const kbPayload = {
-      //key binding payload
-      //VP 에 추가되는 Payload
-      iat: new Date().getTime(), //VP 만든 시각
-      aud: 'https://example.com', //이 VP를 받는 사람 식별자라고 함
-      nonce: await holderSigner(nonce), // 암호화한 난수
-    };
+    // const presenterInstance = new SDJwtVcInstance({
+    //   kbSigner: holderSigner,
+    //   kbSignAlg: 'EdDSA',
+    //   hasher: digest,
+    //   hashAlg: 'SHA-256',
+    //   saltGenerator: generateSalt,
+    // });
+    // const kbPayload = {
+    //   //key binding payload
+    //   //VP 에 추가되는 Payload
+    //   iat: new Date().getTime(), //VP 만든 시각
+    //   aud: 'https://example.com', //이 VP를 받는 사람 식별자라고 함
+    //   nonce: await holderSigner(nonce), // 암호화한 난수
+    // };
 
-    //SDJWTException: Key Binding Signer not found
-    const vp = await presenterInstance.present(
-      credential,
-      {
-        department: true,
-        position: true,
-        join: true,
-        leave: false,
-      },
-      {
-        kb: { payload: kbPayload },
-      },
-    );
-    console.log('\nvp\n');
-    console.log(vp);
+    // //SDJWTException: Key Binding Signer not found
+    // const vp = await presenterInstance.present(
+    //   credential,
+    //   {
+    //     department: true,
+    //     position: true,
+    //     join: true,
+    //     leave: false,
+    //   },
+    //   {
+    //     kb: { payload: kbPayload },
+    //   },
+    // );
+    // console.log('\nvp\n');
+    // console.log(vp);
 
-    //verify 까지
-    const issuerVerifier = await this.createVerifier(issuer.publicKey);
-    const holderVerifier = await this.createVerifier(holder.publicKey);
+    // //verify 까지
+    // const issuerVerifier = await this.createVerifier(issuer.publicKey);
+    // const holderVerifier = await this.createVerifier(holder.publicKey);
 
-    const verifierInstance = new SDJwtVcInstance({
-      verifier: issuerVerifier,
-      signAlg: 'EdDSA',
-      kbVerifier: holderVerifier,
-      kbSignAlg: 'EdDSA',
-      hasher: digest,
-      hashAlg: 'SHA-256',
-      saltGenerator: generateSalt,
-    });
+    // const verifierInstance = new SDJwtVcInstance({
+    //   verifier: issuerVerifier,
+    //   signAlg: 'EdDSA',
+    //   kbVerifier: holderVerifier,
+    //   kbSignAlg: 'EdDSA',
+    //   hasher: digest,
+    //   hashAlg: 'SHA-256',
+    //   saltGenerator: generateSalt,
+    // });
 
-    // console.log('\nverify\n');
-    const verified = await verifierInstance.verify(vp, ['department'], true);
-    // console.log(verified);
+    // // console.log('\nverify\n');
+    // const verified = await verifierInstance.verify(vp, ['department'], true);
+    // // console.log(verified);
 
     return credential;
   }
@@ -241,13 +241,22 @@ export class JwtService {
     const applicant_nonce_entity =
       await this.careerVerifierApplicantNonceService.findOneByDid(holderDid);
 
+    const now = new Date();
+    const nonceCreatedAt = applicant_nonce_entity.createdAt;
+    nonceCreatedAt.setSeconds(nonceCreatedAt.getSeconds() + 15);
+    if (now >= nonceCreatedAt) {
+      // 15초 더한 created at보다 지금이 더 적어야함.
+      // 안 적으면 throw
+      throw new HttpException('2-a', 400);
+    }
+
     const verifyResult = this._verifyNonceUsingPublicKey(
       holderPublicKey,
       applicant_nonce_entity.nonce,
       encryptedNonce,
     );
     if (!verifyResult) {
-      throw new HttpException('pulic key를 통한 난수 verify에 실패함', 400);
+      throw new HttpException('2-c', 403);
     }
     console.log(
       ` 4) 난수 복호화 테스트 : ${verifyResult} - ${encryptedNonce}, ${applicant_nonce_entity.nonce}`,
@@ -274,7 +283,11 @@ export class JwtService {
     });
 
     // console.log('\nverify\n');
-    const verified = await verifierInstance.verify(vp, ['department'], true);
+    const verified = await verifierInstance.verify(
+      vp,
+      ['department', 'join', 'leave'],
+      true,
+    );
     console.log(` 5) SDJwtVcInstance.verify()`);
     return verified;
   }
@@ -302,7 +315,11 @@ export class JwtService {
     // Issuer Define the disclosure frame to specify which claims can be disclosed
     // 일단 4개 항목 다 sd 로 넣음
     const disclosureFrame: DisclosureFrame<typeof claims> = {
-      _sd: ['hair_loss_gene_heritability'],
+      _sd: [
+        'hair_loss_gene_heritability',
+        'dermatitis_gene_heritability',
+        'cancer_risk',
+      ],
     };
 
     // Issue a signed JWT credential with the specified claims and disclosures
@@ -320,62 +337,62 @@ export class JwtService {
       disclosureFrame,
     );
 
-    // 아래는 VP 까지 만드는
-    const nonce = ''; // verifier 에게 받은 Nonce 입력
-    const holder = await this.getHolderByDid(holderDid);
-    const holderSigner = await this.createSigner(holder.privateKey);
+    // // 아래는 VP 까지 만드는
+    // const nonce = ''; // verifier 에게 받은 Nonce 입력
+    // const holder = await this.getHolderByDid(holderDid);
+    // const holderSigner = await this.createSigner(holder.privateKey);
 
-    const presenterInstance = new SDJwtVcInstance({
-      kbSigner: holderSigner,
-      kbSignAlg: 'EdDSA',
-      hasher: digest,
-      hashAlg: 'SHA-256',
-      saltGenerator: generateSalt,
-    });
-    const kbPayload = {
-      //key binding payload
-      //VP 에 추가되는 Payload
-      iat: new Date().getTime(), //VP 만든 시각
-      aud: 'https://example.com', //이 VP를 받는 사람 식별자라고 함
-      nonce: await holderSigner(nonce), // 암호화한 난수 - /verifier/nonce/genetic-test 응답 + Mock
-    };
+    // const presenterInstance = new SDJwtVcInstance({
+    //   kbSigner: holderSigner,
+    //   kbSignAlg: 'EdDSA',
+    //   hasher: digest,
+    //   hashAlg: 'SHA-256',
+    //   saltGenerator: generateSalt,
+    // });
+    // const kbPayload = {
+    //   //key binding payload
+    //   //VP 에 추가되는 Payload
+    //   iat: new Date().getTime(), //VP 만든 시각
+    //   aud: 'https://example.com', //이 VP를 받는 사람 식별자라고 함
+    //   nonce: await holderSigner(nonce), // 암호화한 난수 - /verifier/nonce/genetic-test 응답 + Mock
+    // };
 
-    //SDJWTException: Key Binding Signer not found
-    const vp = await presenterInstance.present(
-      credential,
-      {
-        hair_loss_gene_heritability: true,
-        dermatitis_gene_heritability: true,
-        cancer_risk: true,
-      },
-      {
-        kb: { payload: kbPayload },
-      },
-    );
-    console.log('\nvp\n');
-    console.log(vp);
+    // //SDJWTException: Key Binding Signer not found
+    // const vp = await presenterInstance.present(
+    //   credential,
+    //   {
+    //     hair_loss_gene_heritability: true,
+    //     dermatitis_gene_heritability: true,
+    //     cancer_risk: true,
+    //   },
+    //   {
+    //     kb: { payload: kbPayload },
+    //   },
+    // );
+    // console.log('\nvp\n');
+    // console.log(vp);
 
-    //verify 까지
-    const issuerVerifier = await this.createVerifier(issuer.publicKey);
-    const holderVerifier = await this.createVerifier(holder.publicKey);
+    // //verify 까지
+    // const issuerVerifier = await this.createVerifier(issuer.publicKey);
+    // const holderVerifier = await this.createVerifier(holder.publicKey);
 
-    const verifierInstance = new SDJwtVcInstance({
-      verifier: issuerVerifier,
-      signAlg: 'EdDSA',
-      kbVerifier: holderVerifier,
-      kbSignAlg: 'EdDSA',
-      hasher: digest,
-      hashAlg: 'SHA-256',
-      saltGenerator: generateSalt,
-    });
+    // const verifierInstance = new SDJwtVcInstance({
+    //   verifier: issuerVerifier,
+    //   signAlg: 'EdDSA',
+    //   kbVerifier: holderVerifier,
+    //   kbSignAlg: 'EdDSA',
+    //   hasher: digest,
+    //   hashAlg: 'SHA-256',
+    //   saltGenerator: generateSalt,
+    // });
 
-    // console.log('\nverify\n');
-    const verified = await verifierInstance.verify(
-      vp,
-      ['dermatitis_gene_heritability'],
-      true,
-    );
-    // console.log(verified);
+    // // console.log('\nverify\n');
+    // const verified = await verifierInstance.verify(
+    //   vp,
+    //   ['dermatitis_gene_heritability'],
+    //   true,
+    // );
+    // // console.log(verified);
 
     return credential;
   }
@@ -405,19 +422,29 @@ export class JwtService {
       await this.didResolverService.getPublicKeyByDid(issuerDid);
     console.log(` 3) did 리졸버로 issuerPublicKey 얻기 : ${issuerPublicKey}`);
 
-    const applicant_nonce_entity =
+    //4. 난수 복호화 테스트
+    const member_nonce_entity =
       await this.geneticTestVerifierMemberNonceService.findOneByDid(holderDid);
+
+    const now = new Date();
+    const nonceCreatedAt = member_nonce_entity.createdAt;
+    nonceCreatedAt.setSeconds(nonceCreatedAt.getSeconds() + 15);
+    if (now >= nonceCreatedAt) {
+      // 15초 더한 created at보다 지금이 더 적어야함.
+      // 안 적으면 throw
+      throw new HttpException('2-a', 400);
+    }
 
     const verifyResult = this._verifyNonceUsingPublicKey(
       holderPublicKey,
-      applicant_nonce_entity.nonce,
+      member_nonce_entity.nonce,
       encryptedNonce,
     );
     if (!verifyResult) {
-      throw new HttpException('pulic key를 통한 난수 verify에 실패함', 400);
+      throw new HttpException('2-c', 403);
     }
     console.log(
-      ` 4) 난수 복호화 테스트 : ${verifyResult} - ${encryptedNonce}, ${applicant_nonce_entity.nonce}`,
+      ` 4) 난수 복호화 테스트 : ${verifyResult} - ${encryptedNonce}, ${member_nonce_entity.nonce}`,
     );
 
     //5. instance.verify() 하기
@@ -441,7 +468,7 @@ export class JwtService {
     // console.log('\nverify\n');
     const verified = await verifierInstance.verify(
       vp,
-      ['dermatitis_gene_heritability'],
+      ['hair_loss_gene_heritability', 'dermatitis_gene_heritability'], // 생명보험사면 cancer_risk 되도록 수정
       true,
     );
     console.log(` 5) SDJwtVcInstance.verify()`);
@@ -460,9 +487,6 @@ export class JwtService {
     return sdJwtToken;
   }
 
-  // 이거 일단 임시로 추상화한다고 생각하고 이렇게 만들어놓겠음.
-  // 임시로 만들어놓은 방식은 아래 참조
-  // 바꿔야 함. 암호화와 같은 알고리즘으로 복호화했을 때 같은지 진짜 확인하기. publicKey 타입 바꾸기
   async _verifyNonceUsingPublicKey(
     publicKey: JsonWebKey,
     originalNonce: number,

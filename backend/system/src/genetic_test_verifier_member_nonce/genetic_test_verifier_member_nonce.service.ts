@@ -38,6 +38,7 @@ export class GeneticTestVerifierMemberNonceService {
     return new GeneticTestVerifierMemberNonce({
       did: entity.did,
       nonce: entity.nonce,
+      createdAt: entity.createdAt,
     });
   }
 }
