@@ -2,16 +2,7 @@ import { CredentialInfo } from '@/entities/credentialInfo';
 import { SDJwtInstance } from '@sd-jwt/core';
 import { decodeSdJwt, getClaims } from '@sd-jwt/decode';
 import { digest, generateSalt, getSigner } from '@/utils/crypto';
-
-export const holderPrivateKey = {
-  key_ops: ['sign'],
-  ext: true,
-  kty: 'EC',
-  x: 'UnjoAVHwrQctpLfwxodbv84tCqGFytR-3ftvMFue8UU',
-  y: 'O3ZiOJgGicy6CHBfQQ2P5G79O72YkZ065KztH6lUEO0',
-  crv: 'P-256',
-  d: 'NaRtJp5hu2T2K30xIEd2SY3CkGSAoIqDF8NP0syIOvM',
-};
+import { holderPrivateKey } from '@/common/const';
 
 export const dummyEncrypt = (data: string) => {
   return data + 'mock';
