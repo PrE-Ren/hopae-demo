@@ -1,6 +1,6 @@
 ## Description
 
-호패 데모용 백엔드 시스템을 사용하는 방법
+창통설 W조 demo 의 백엔드 시스템을 사용하는 방법
 
 ## UserManual
 
