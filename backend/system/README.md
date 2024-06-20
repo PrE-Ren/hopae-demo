@@ -74,7 +74,7 @@ curl -X POST localhost:8000/init/all
 - MySQL 콘솔 접속 후 아래 명령어 실행
 
   ```bash
-  # db 선택
+  # db 선택
   USE dev_db;
   # holder DID 가져오기
   SELECT did FROM testHolderEntity ORDER BY id ASC LIMIT 1;
