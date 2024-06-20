@@ -21,14 +21,20 @@ $ npm run dev
 ```
 
 - ngrok 를 사용하여 localhost 3000과 8000을 public URL로 포워딩한다.
+
   - ngrok를 설치하고 (검색 통해 설치법 확인 요망 - os 따라 설치법이 다름)
-  - ngrok 사이트에서 회원가입 후 AUTH_TOKEN 복사
-  - $ ngrok config add-authtoken {AUTH_TOKEN}
-  - $ ngrok http 8000
-    - 백엔드 local host public forwarding
-  - $ ngrok http 3000
-    - 프론트엔드 웹 local host public forwarding
-- 프로젝트 코드에서 `frontendHostingUrl`, `backendHostingURL` 위의 public URL로 바꾼다.
+  - 쉘에서 아래 작업 순차적으로 실행
+
+    ```shell
+      # $ 회원가입한 뒤 마이페이지에서 확인할 수 있는 AUTH_TOKEN을 아래 넣어 커맨드 실행
+      $ ngrok config add-authtoken {AUTH_TOKEN}
+      # 백엔드 localhost forwarding
+      $ ngrok http 8000
+      # 프론트엔드 웹 localhost forwarding
+      $ ngrok http 3000
+    ```
+
+- 프로젝트 코드에서 `frontendHostingUrl`, `backendHostingURL` 위 과정에서 확인할 수 있는 public Url로 갈아낀다.
   - `backendHostingURL` in /frontend/web/common/config.ts
   - `frontendHostingUrl` in /app/wallet/src/common.ts
 
