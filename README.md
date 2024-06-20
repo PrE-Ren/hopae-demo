@@ -16,7 +16,7 @@ backend/system/README.md 대로 세팅한다.
 ### 2. 웹 실행
 
 ```bash
-$ cd /frontend/web
+$ cd frontend/web
 $ npm run dev
 ```
 
