@@ -72,13 +72,10 @@ curl -X POST localhost:8000/init/all
 
 ### 6. DB 에 근무 이력, 유전자 검사 결과 등록하는 SQL 문
 
-- mysql DB에 각 행위자의 정보가 저장된다.
-- dock chain에 각 행위자의 did doc 등록된다.
-
 - MySQL 콘솔 접속 후 아래 명령어 실행
 
   ```bash
-  # 현재 mysql 서버에 존재하는 db 목록 확인
+  # db 선택
   USE dev_db;
   # holder DID 가져오기
   SELECT did FROM testHolderEntity ORDER BY id ASC LIMIT 1;
