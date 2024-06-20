@@ -69,8 +69,7 @@ $ npm run start:dev
 curl -X POST localhost:8000/init/all
 ```
 
-
-### 6. DB 에 근무 이력, 유전자 검사 결과 등록하는 SQL 문
+### 6. DB 에 근무 이력, 유전자 검사 결과 등록
 
 - MySQL 콘솔 접속 후 아래 명령어 실행
 
@@ -80,7 +79,7 @@ curl -X POST localhost:8000/init/all
   # holder DID 가져오기
   SELECT did FROM testHolderEntity ORDER BY id ASC LIMIT 1;
   # 근무 이력 생성하기
-  INSERT INTO careerIssuerEmployee (did, department, position, salary, join, leave, createdAt, updatedAt, deletedAt) VALUES ('{위에서 얻은 holder DID}', '영업부', '대리', 5000, '2024-01-01', '2024-12-31', '2024-06-20 12:34:56', '2024-06-20 12:34:56', NULL);
+  INSERT INTO careerIssuerEmployee (did, department, position, salary, `join`, `leave`, createdAt, updatedAt, deletedAt) VALUES ('{위에서 얻은 holder DID}', '영업부', '대리', 5000, '2024-01-01', '2024-12-31', '2024-06-20 12:34:56', '2024-06-20 12:34:56', NULL);
    # 유전자 검사 결과 생성하기
   INSERT INTO geneticTestIssuerResult (did, hairLossGeneHeritability, dermatitisGeneHeritability, stomachCancerRisk, lungsCancerRisk, liverCancerRisk, pancreasCancerRisk, createdAt, updatedAt, deletedAt) VALUES ('{위에서 얻은 holder DID}', 75, 60, 15, 20, 10, 5, '2024-06-20 12:34:56', '2024-06-20 12:34:56', NULL);
 
