@@ -21,6 +21,11 @@ $ npm run dev
 ```
 
 - ngrok 를 사용하여 localhost 3000과 8000을 public URL로 포워딩한다.
+  - ngrok를 설치하고 (검색 통해 설치법 확인 요망 - os 따라 설치법이 다름)
+  - $ ngrok http 8000
+    - 백엔드 local host public forwarding
+  - $ ngrok http 3000
+    - 프론트엔드 웹 local host public forwarding
 - 프로젝트 코드에서 `frontendHostingUrl`, `backendHostingURL` 위의 public URL로 바꾼다.
   - `backendHostingURL` in /frontend/web/common/config.ts
   - `frontendHostingUrl` in /app/wallet/src/common.ts
