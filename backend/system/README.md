@@ -4,6 +4,8 @@
 
 ## UserManual
 
+### node version 은 20.13.1로 맞춰주세요!
+
 ### 1. Package 설치
 
 ```bash
@@ -66,3 +68,24 @@ $ npm run start:dev
 ```bash
 curl -X POST localhost:8000/init/all
 ```
+
+
+### 6. DB 에 근무 이력, 유전자 검사 결과 등록하는 SQL 문
+
+- mysql DB에 각 행위자의 정보가 저장된다.
+- dock chain에 각 행위자의 did doc 등록된다.
+
+- MySQL 콘솔 접속 후 아래 명령어 실행
+
+  ```bash
+  # 현재 mysql 서버에 존재하는 db 목록 확인
+  USE dev_db;
+  # holder DID 가져오기
+  SELECT did FROM testHolderEntity ORDER BY id ASC LIMIT 1;
+  # 근무 이력 생성하기
+  INSERT INTO careerIssuerEmployee (did, department, position, salary, join, leave, createdAt, updatedAt, deletedAt) VALUES
+  ('{위에서 얻은 holder DID}', '영업부', '대리', 5000, '2024-01-01', '2024-12-31', '2024-06-20 12:34:56', '2024-06-20 12:34:56', NULL);
+   # 유전자 검사 결과 생성하기
+  INSERT INTO geneticTestIssuerResult (did, hairLossGeneHeritability, dermatitisGeneHeritability, stomachCancerRisk, lungsCancerRisk, liverCancerRisk, pancreasCancerRisk, createdAt, updatedAt, deletedAt) VALUES ('{위에서 얻은 holder DID}', 75, 60, 15, 20, 10, 5, '2024-06-20 12:34:56', '2024-06-20 12:34:56', NULL);
+
+  ```
