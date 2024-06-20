@@ -54,7 +54,7 @@ $ docker run -p 9944:9944 -p 30333:30333 docknetwork/dock-substrate:testnet --de
 ### 4. 서버 실행 (port: 8000)
 
 ```bash
-$ cd /backend/system
+$ cd backend/system
 $ npm run start:dev
 ```
 
